@@ -1,0 +1,27 @@
+<% provide(:title, "Submit") %>
+<div class="form-container">
+	<% @ques_num = params.fetch(:ques_num).to_i %>
+	<% if @ques_num == 1 %>
+		<h3><center>Part 1: General Overview</center></h3>
+	<% elsif @ques_num == 2 %>
+		<h3><center>Part 2: Terminology Associated With Coin Architecture</center></h3>
+	<% elsif @ques_num == 3 %>
+		<h3><center>Part 3: CEO / Dev Team / Important Contributors</center></h3>
+	<% elsif @ques_num == 4 %>
+		<h3><center>Part 4: Crypto Roadmap</center></h3>
+	<% elsif @ques_num == 5 %>
+		<h3><center>Part 5: References</center></h3>
+	<% elsif @ques_num == 6 %>
+		<h3><center>General Overview - Brief History </center></h3>
+	<% elsif @ques_num == 7 %>
+		<h3><center>General Overview - Goverence Model</center></h3>
+	<% elsif @ques_num == 8 %>
+		<h3><center>General Overview - Dev Overview</center></h3>
+	<% elsif @ques_num == 9 %>
+		<h3><center>General Overview - Community Outline</center></h3>
+	<% else %>
+		<h3>Submit Answers</h3>
+	<% end %>
+	
+	<%= render 'form' %>
+</div>

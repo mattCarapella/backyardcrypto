@@ -1,0 +1,149 @@
+<% provide(:title, "Edit Coin") %>
+<h1> Edit Coin </h1>
+
+<div class='form-container'>
+	<%= simple_form_for @coin, url: coin_path do |f| %>
+		<h2>Edit Coin</h2>
+		<div class="form-container__section">
+			
+<!-- 			<% if can? :edit, Coin %>
+				<h4>Accept?</h4>
+				<div class="form-container__dropdown">
+					<%= f.select :accepted, options_for_select([[" ", " "],['Yes', true], ['No', false]]) %>
+				</div>
+			<% end %> -->
+
+			<%= f.input :currency_name, label: false, class: 'form-control' %>
+			<%= f.input :link_name, placeholder: "Link Name", label: false, class: 'form-control' %>
+
+			<p class="file-upload-text"><b>Logo</b> (Pictures must be in .jpg, .gif, or .png format and less than 5MB)</p>
+			<%= f.file_field :picture, id: 'file-upload', accept: 'image/jpeg,image/gif,image/png'%>
+
+			<%= f.input :currency_abbrev, label: false, placeholder: "Currency Abbreviation", class: 'form-control' %>
+			<%= f.input :working_product, placeholder: "Link to Working Product", label: false %>
+			<%= f.input :founder, placeholder: "Founder", label: false, class: 'form-control' %>
+
+			<div class="form-container__checkbox">
+				<h3>Genres</h3>
+				<%= f.collection_check_boxes :genre_ids, Genre.all, :id, :displayname do |b| %>
+				<%= b.check_box %>
+				<p><%= b.label %></p>
+				<% end %>
+			</div>
+
+			<div class="form-container__dropdown">
+				<h4><b>Mineable</b></h4>	<%= f.select :mineable, options_for_select([[" ", " "],['Yes', true], ['No', false]], :label => "Mineable")%>
+			</div>
+
+			<div class="form-container__dropdown">
+				<h4>Date of ICO</h4>
+				<%= f.input :date_of_ico, label: false, order: [:month, :day, :year], class: 'form-control' %>
+			</div>
+
+			<%= f.input :money_raised_in_ico, label: false, placeholder: "Money Raised in ICO", class: 'form-control' %>
+		</div>
+
+		<div class="form-container__section">
+			<h3>Links</h3>
+			<%= f.input :website, class: 'form-control', label: false, placeholder: "Website" %>
+			<%= f.input :reddit, class: 'form-control', label: false, placeholder: "Reddit" %>
+			<%= f.input :app, class: 'form-control', label: false, placeholder: "App" %>
+			<%= f.input :facebook, class: 'form-control', label: false, placeholder: "Facebook" %>
+			<%= f.input :twitter, class: 'form-control', label: false, placeholder: "Twitter" %>
+			<%= f.input :youtube, class: 'form-control', label: false, placeholder: "YouTube" %>
+			<%= f.input :whitepaper, class: 'form-control', label: false, placeholder: "Whitepaper" %>
+			<%= f.input :discord, class: 'form-control', label: false, placeholder: "Discord" %>
+			<%= f.input :slack, class: 'form-control', label: false, placeholder: "Slack" %>
+			<%= f.input :github, class: 'form-control', label: false, placeholder: "Github" %>
+			<%= f.input :tradingview, class: 'form-control', label: false, placeholder: "TradingView" %>
+			<%= f.input :bitcointalk, class: 'form-control', label: false, placeholder: "Bitcointalk" %>
+			<%= f.input :stackexchange, class: 'form-control', label: false, placeholder: "Stack Exchange" %>
+			<%= f.input :coinmarketcap, class: 'form-control', label: false, placeholder: "CoinMarketCap" %>
+			<%= f.input :gitter, class: 'form-control', label: false, placeholder: "Gitter" %>
+			<%= f.input :blockexplorer, class: 'form-control', label: false, placeholder: "Block Explorer" %>
+		</div>
+
+		<div class="form-container__section">
+			<h3>Exchanges</h3>
+			<%= f.input :bitfinex, class: 'form-control', label: false, placeholder: "Bitfinex" %>
+			<%= f.input :bithumb, class: 'form-control', label: false, placeholder: "bithumb" %>
+			<%= f.input :bitflyer, class: 'form-control', label: false, placeholder: "bitFlyer" %>
+			<%= f.input :hitbtc, class: 'form-control', label: false, placeholder: "HitBTC" %>
+			<%= f.input :kucoin, class: 'form-control', label: false, placeholder: "KuCoin" %>
+			<%= f.input :poloniex, class: 'form-control', label: false, placeholder: "Poloniex" %>
+			<%= f.input :bitstamp, class: 'form-control', label: false, placeholder: "Bitstamp" %>
+			<%= f.input :bittrex, class: 'form-control', label: false, placeholder: "Bittrex" %>
+			<%= f.input :gdax, class: 'form-control', label: false, placeholder: "GDAX" %>
+			<%= f.input :gemini, class: 'form-control', label: false, placeholder: "Gemini" %>
+			<%= f.input :btcc, class: 'form-control', label: false, placeholder: "BTCC" %>
+			<%= f.input :kraken, class: 'form-control', label: false, placeholder: "Kraken" %>
+			<%= f.input :korbit, class: 'form-control', label: false, placeholder: "Korbit" %>
+			<%= f.input :binance, class: 'form-control', label: false, placeholder: "Binance" %>
+			<%= f.input :yorbit, class: 'form-control', label: false, placeholder: "Yorbit" %>
+			<%= f.input :okcoin, class: 'form-control', label: false, placeholder: "OKCoin" %>
+		</div>
+
+		<hr><h2>Long Answer Questions</h2><hr>
+
+		<h2>Brief Overview</h2>
+		<% if (@question.present? and @question.ques_num.to_i == 1) || @coin.question1.present? %>
+			<%= f.cktext_area :question1, value: (@coin.question1.present? && @question.nil?) ||  (@question.present? && @question.ques_num.to_i != 1)  ? @coin.question1 :  @question.content  %>
+		<% else %>
+			<%= f.input :question1 %>
+		<% end %>
+
+		<h2>Brief History</h2>
+		<%= @question.content if @question.present?%>
+		<% if (@question.present? and @question.ques_num.to_i == 6) || @coin.question6.present? %>
+			<%= f.cktext_area :question6, value: (@coin.question6.present? && @question.nil?) ||  (@question.present? && @question.ques_num.to_i != 6)  ? @coin.question6 :  @question.content  %>
+		<% else %>
+			<%= f.input :question6, label: false %>
+		<% end %>
+
+		<h2>Goverence Model</h2>
+		<% if (@question.present? and @question.ques_num.to_i == 7) || @coin.question7.present? %>
+			<%= f.cktext_area :question7, value: (@coin.question7.present? && @question.nil?) ||  (@question.present? && @question.ques_num.to_i != 7)  ? @coin.question7 :  @question.content  %>
+		<% else %>
+			<%= f.input :question7, label: false %>
+		<% end %>
+
+		<h2>Dev Overview</h2>
+		<% if (@question.present? and @question.ques_num.to_i == 8) || @coin.question8.present? %>
+			<%= f.cktext_area :question8, value: (@coin.question8.present? && @question.nil?) ||  (@question.present? && @question.ques_num.to_i != 8)  ? @coin.question8 :  @question.content  %>
+		<% else %>
+			<%= f.input :question8, label: false %>
+		<% end %>
+
+		<h2>Community Outline</h2>
+		<% if (@question.present? and @question.ques_num.to_i == 9) || @coin.question9.present? %>
+			<%= f.cktext_area :question9,value: (@coin.question9.present? && @question.nil?) ||  (@question.present? && @question.ques_num.to_i != 9)  ? @coin.question9 :  @question.content  %>
+		<% else %>
+			<%= f.input :question9, label: false %>
+		<% end %>
+
+
+		<h2>In-Depth Analysis</h2>
+		<% if (@question.present? and @question.ques_num.to_i == 4)  || @coin.question4.present? %>
+			<%= f.cktext_area :question4,value: (@coin.question4.present?  && @question.nil?) || (@question.present? && @question.ques_num.to_i != 4) ?  @coin.question4 : @question.content  %>
+		<% else %>
+			<%= f.input :question4, label: false %>
+
+		<% end %>
+
+		<%= f.submit "Submit", class: "primary-small", style: "margin-top: 20px;" %>
+
+	<% end %>
+
+	<script type="text/javascript">
+	  $('#micropost_picture').bind('change', function() {
+	    var size_in_megabytes = this.files[0].size/1024/1024;
+	    if (size_in_megabytes > 5) {
+	      alert('Maximum file size is 5MB. Please choose a smaller file.');
+	    }
+	  });
+	</script>
+	<div class="form-container__horizontal-button-group">
+		<%= link_to "Back to All Coins", coins_path, class: "secondary-small" %>
+		<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small" %>
+	</div>
+</div>

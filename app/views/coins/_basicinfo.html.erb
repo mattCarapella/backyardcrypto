@@ -1,0 +1,106 @@
+<div class="basic-info-container">
+	<div class="basic-info-container__coin-id">
+		<div class="basic-info-container__coin-thumbnail">
+			<%= image_tag @coin.picture if @coin.picture? %>
+		</div>
+		<img class="" src='<%= @img_url_ %>' />
+		<div class="basic-info-container__coin-title-info">
+			<h3><%= @coin.currency_name %></h3>
+			<% coin_change_class = "coin-change" %>
+			<% @percent_change_1h_ >= 0 ? coin_change_class += ' positive' : coin_change_class += ' negative' %>
+			<p class='<%= coin_change_class %>'><%= @percent_change_1h_ %>%</p>
+		</div>
+		<%= link_to "#{@symbol_} Community", coin_posts_path(@coin.id), class: "primary-small" %>
+	</div>
+
+	<div class="basic-info-container__info-container">
+		<h4>Info</h4>
+		<% if @name_ %><p><b>Coin Name: </b><%= @name_ %><% end %>
+		<% if @symbol_ %>(<%= @symbol_ %>)</p><% end %>
+		<% if @rank_ %><p><b>Current Ranking: </b><%= @rank_ %></p><% end %>
+		<% if @price_usd_ %><p><b>Current Price (USD): </b><%= number_to_currency(@price_usd_, :unit => "$") %></p><% end %>
+		<% if @price_btc_ %><p><b>Current Price (BTC): </b><%= @price_btc_ %> BTC</p><% end %>
+		<% if @market_cap_usd_ %><p><b>Market Cap (USD): </b><%= number_to_currency(@market_cap_usd_, :unit => "$") %></p><% end %>
+		<% if @circulating_supply_ %><p><b>Available Supply: </b><%= number_with_delimiter(@circulating_supply_.to_i, :delimiter => ',') %></p><% end %>
+		<% if @total_supply_ %><p><b>Total Supply: </b><%= number_with_delimiter(@total_supply_.to_i, :delimiter => ',') %></p><% end %>
+		<% if @max_supply_ %><p><b>Max Supply: </b><%= number_with_delimiter(@max_supply_.to_i, :delimiter => ',') %></p><% end %>
+		<% if @percent_change_1h_ %><p><b>Percent Change - 1hr: </b><%= @percent_change_1h_ %>%</p><% end %>
+		<% if @percent_change_24h_ %><p><b>Percent Change - 24hr: </b><%= @percent_change_24h_ %>%</p><% end %>
+		<% if @percent_change_7d_ %><p><b>Percent Change - 7 days: </b><%= @percent_change_7d_ %>%</p><% end %>
+		<% if @price_usd_ %><p><b>Current Price: </b><%= @price_usd_ %></p><% end %>
+		<% if @coin.founder %><b>Founder: <p></b> <%= @coin.founder %></p><% end %>
+		<% if @coin.country_of_origin %><p><b>Country of Origin: </b> <%= @coin.country_of_origin %></p><% end %>
+		<% if @coin.date_of_ico %><p><b>Date of ICO: </b> <%= @coin.date_of_ico %></p><% end %>
+		<% if @coin.money_raised_in_ico %><p><b>Money Raised in ICO: </b> <%= @coin.money_raised_in_ico %></p><% end %>
+		<% if @coin.mineable %><p><b>Mineable: </b> <%= bool_to_words(@coin.mineable) %></p><% end %>
+	</div>
+
+	<div class="basic-info-container__info-container">
+		<h4>Links </h4>
+		<% if @coin.website %><p><b>Website: </b><%= link_to @coin.website %></p><% end %>
+		<% if @coin.whitepaper %><p><b>White Paper: </b><%= link_to @coin.whitepaper %></p><% end %>
+		<% if @coin.app %><p><b>Mobile App: </b><%= link_to @coin.app %></p><% end %>
+		<% if @coin.reddit %><p><b>Reddit: </b><%= link_to @coin.reddit  %></p><% end %>
+		<% if @coin.facebook %><p><b>Facebook: </b><%= link_to @coin.facebook %></p><% end %>
+		<% if @coin.twitter %><p><b>Twitter: </b><%= link_to @coin.twitter %></p><% end %>
+		<% if @coin.youtube %><p><b>Youtube: </b><%= link_to @coin.youtube  %></p><% end %>
+		<% if @coin.slack %><p><b>Slack: </b><%= link_to @coin.slack  %></p><% end %>
+		<% if @coin.discord %><p><b>Discord: </b><%= link_to @coin.discord  %></p><% end %>
+		<% if @coin.github %><p><b>Github: </b><%= link_to @coin.github %></p><% end %>
+		<% if @coin.tradingview %><p><b>Tradingview: </b><%= link_to @coin.tradingview  %></p><% end %>
+		<% if @coin.bitcointalk %><p><b>Bitcoin Talk: </b><%= link_to @coin.bitcointalk  %></p><% end %>
+		<% if @coin.stackexchange %><p><b>Stack Exchange: </b><%= link_to @coin.stackexchange  %></p><% end %>
+		<% if @coin.coinmarketcap %><p><b>CoinMarketCap: </b><%= link_to @coin.coinmarketcap %></p><% end %>
+		<% if @coin.gitter %><p><b>Gitter: </b><%= link_to @coin.gitter %></p><% end %>
+		<% if @coin.blockexplorer %><p><b>Block Explorer: </b><%= link_to @coin.blockexplorer %></p><% end %>
+		<% if @coin.telegram %><p><b>Telegram: </b><%= link_to @coin.telegram %></p><% end %>
+		<% if @coin.weibo %><p><b>Weibo: </b><%= link_to @coin.weibo %></p><% end %>
+	</div>
+
+	<div class="basic-info-container__info-container">
+		<h4>Exchanges </h4>
+		<% if @coin.bitfinex %><p><b>Bitfinex: </b><%= link_to @coin.bitfinex %></p><% end %>
+		<% if @coin.bithumb %><p><b>Bithumb: </b><%= link_to @coin.bithumb %></p><% end %>
+		<% if @coin.bitflyer %><p><b>Bitflyer: </b><%= link_to @coin.bitflyer %></p><% end %>
+		<% if @coin.hitbtc %><p><b>Hitbtc: </b><%= link_to @coin.hitbtc %></p><% end %>
+		<% if @coin.kucoin %><p><b>Kucoin: </b><%= link_to @coin.kucoin %></p><% end %>
+		<% if @coin.poloniex %><p><b>Poloniex: </b><%= link_to @coin.poloniex %></p><% end %>
+		<% if @coin.bitstamp %><p><b>Bitstamp: </b><%= link_to @coin.bitstamp %></p><% end %>
+		<% if @coin.bittrex %><p><b>Bittrex: </b><%= link_to @coin.bittrex %></p><% end %>
+		<% if @coin.gdax %><p><b>Gdax: </b><%= link_to @coin.gdax %></p><% end %>
+		<% if @coin.gemini %><p><b>Gemini: </b><%= link_to @coin.gemini %></p><% end %>
+		<% if @coin.btcc %><p><b>BTCC: </b><%= link_to @coin.btcc %></p><% end %>
+		<% if @coin.kraken %><p><b>Kraken: </b><%= link_to @coin.kraken %></p><% end %>
+		<% if @coin.korbit %><p><b>Korbit: </b><%= link_to @coin.korbit %></p><% end %>
+		<% if @coin.binance %><p><b>Binance: </b><%= link_to @coin.binance %></p><% end %>
+		<% if @coin.yorbit %><p><b>Yorbit: </b><%= link_to @coin.yorbit %></p><% end %>
+		<% if @coin.okcoin %><p><b>OKCoin: </b><%= link_to @coin.okcoin %></p><% end %>
+	</div>
+
+	<div class="basic-info-container__info-container" id="other-links">
+		<div class="other-links-header">
+			<h4>Other Links </h4>
+			<%= link_to "Submit", new_coin_link_path(@coin), class: "primary-small" %>
+		</div>
+		<div class="other-links-container">
+			<% @coin_links = @coin.links.sort %>
+
+			<% @coin_links.sort! do |a, b| %>
+			<% comp = (a.websitename <=> b.websitename) %>
+			<% if comp.zero? %>
+			<% a.websitename <=> b.websitename %>
+			<% end %>
+			<% comp	%>
+			<% end %>
+
+			<% @coin_links.each do |link| %>
+			<% if link.accepted? %>
+				<ul><a href='<%= link.url %>' class="default-link"><%= link.websitename %></a></ul>
+			<% end %>
+			<% end %>
+		</div>
+		<% if can? :update, @link %>
+			<%= link_to "View Submitted Links", coin_links_path(@coin), class: "primary-small" %>
+		<% end %>
+	</div>
+</div>

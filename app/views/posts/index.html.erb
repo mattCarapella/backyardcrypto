@@ -1,0 +1,61 @@
+<% provide(:title, "Community") %>
+
+<div class="posts-container">
+	<div class="row" id="msg-board-hdr">
+
+		<div class="col-md-1">
+			<%= image_tag @coin.picture.url if @coin.picture? %>
+		</div>
+
+		<div class="col-md-8">
+		</div>
+	</div>
+
+	<div class="row" id="msg-board">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9" id="articles">
+
+
+					<% sorted = @posts.sort { |a,b| a.get_upvotes.size <=> b.get_upvotes.size }		%>
+					<% sorted.reverse.each do |post| %>
+
+					<div class="post row clearfix">
+
+
+						<h8><%= link_to post.title, coin_post_path(post.coin_id, post.id) %></h8>
+
+						<br>
+
+						<%= link_to like_coin_post_path(post.coin.id, post.id), method: :put, class: "btn btn-default btn-md" do %>
+						<span class="glyphicon glyphicon-chevron-up"></span>
+						<%= post.get_upvotes.size %>
+						<% end %>
+
+						<%= link_to dislike_coin_post_path(post.coin.id, post.id), method: :put, class: "btn btn-default btn-md" do %>
+						<span class="glyphicon glyphicon-chevron-down "></span>
+						<%= post.get_downvotes.size %>
+						<% end %>
+						<small class="author">Submitted <%= time_ago_in_words(post.created_at) %> by <%= post.user.username %> | <b><%= post.comments.count %> Comments</b></small>
+
+						<% if post.user == current_user || current_user == @coin.moderator %>
+						<%= link_to "Edit", edit_coin_post_path(post.coin.id, post.id) %>
+						<%= link_to "Delete", coin_post_path(post.coin.id, post.id), method: :delete, data: { confirm: "Do you want to delete this submission?" } %>
+						<% end %>
+					</div>
+
+					<br>
+					<% end %>
+				</div>
+
+				<div class="col-md-3">
+					<ul class="list-group">
+						<%= link_to "New Post", new_coin_post_path(@coin.id), class: "btn btn-default col-button" %><br>
+						<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "btn btn-default col-button" %><br>
+						<%= link_to "All Coins", coins_path, class: "btn btn-default col-button" %><br>
+						<%= link_to "Home", root_path, class: "btn btn-default col-button" %><br>
+					</ul>
+				</div>
+			</div>
+		</div>
+</div>

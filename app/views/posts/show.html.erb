@@ -1,0 +1,60 @@
+<div class="post-container">
+  <div class="row" id="msg-board">
+    <div class="container">
+      <div class="col-md-1" id="votes">
+        <%= link_to like_coin_post_path(@post.coin.id, @post.id), method: :put, class: "btn btn-default btn-md" do %>
+        <span class="glyphicon glyphicon-chevron-up"></span>
+        <%= @post.get_upvotes.size %>
+        <% end %>
+        <%= link_to dislike_coin_post_path(@post.coin.id, @post.id), method: :put, class: "btn btn-default btn-md" do %>
+        <span class="glyphicon glyphicon-chevron-down "></span>
+        <%= @post.get_downvotes.size %>
+        <% end %>
+      </div>
+
+      <div class="col-md-9" id="articles">
+        <% if @post.url? %>
+        <h2><%= link_to "[Read] " + @post.title, @post.url %></h2>
+        <% else %>
+        <h2><%= @post.title %></h2>
+        <% end %>
+
+        <hr>
+        <% if @post.content? %>
+        <p><%= @post.content %></p>
+        <% end %>
+        <hr>
+
+        <% if @post.user == current_user %>
+        <%= link_to "Edit", edit_coin_post_path(@post.coin.id, @post.id), class: "secondary-small" %>
+        <%= link_to "Delete", coin_post_path(@post.coin.id, @post.id), method: :delete, data: { confirm: "Do you want to delete this submission?" }, class: "secondary-small" %>
+        <% end %>
+      </div>
+
+      <div class="col-md-2" id="post-buttons">
+        <ul class="list-group">
+          <%= link_to "New Post", new_coin_post_path(@coin.id), class: "btn btn-default col-button" %><br>
+          <%= link_to "Back to Community", coin_posts_path(@coin.id), class: "btn btn-default col-button" %><br>
+          <%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "btn btn-default col-button" %><br>
+          <%= link_to "All Coins", coins_path, class: "btn btn-default col-button" %><br>
+          <%= link_to "Home", root_path, class: "btn btn-default col-button" %><br>
+        </ul>
+      </div>
+    </div>
+    <div class="comments_title">
+      <%= @post.comments.count %> <b>Comments</b>
+    </div>
+    <hr>
+
+    <div id="comments">
+      <%= render :partial => @post.comments %>
+    </div>
+
+    <%= simple_form_for [@coin, @post, Comment.new] do |f| %>
+    <div class="field">
+      <%= f.text_area :body, class: "form-control" %>
+    </div>
+    <br>
+    <%= f.submit "Add Comment", class: "btn btn-primary" %>
+    <% end %>
+</div>

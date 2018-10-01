@@ -1,0 +1,81 @@
+<% provide(:title, "Key Players | Terminology") %>
+
+<script type="text/javascript">
+	$(
+		function() {
+			$( "#accordion" ).accordion({
+				collapsible: true,
+				active: false,
+				heightStyle: "content",
+		});
+	});
+
+</script>
+
+<div class="key-players-term-container">
+	
+	<div class="key-players-term-container__title" id="terms-keyplayers">
+		<% if params[:ques_num].to_s == "2" %>
+			<h2>Terminology</h2>
+		<% end %>
+		<% if params[:ques_num].to_s == "3" %>
+			<h2>Key Players</h2>
+		<% end %>
+		<hr>
+		<div class="key-players-term-container__content">
+			<% sorted_terms = @questions.sort{ |a,b| a.term.downcase <=> b.term.downcase } %>
+			<div id='accordion'>
+				<% sorted_terms.each do |question| %>
+					<div class="term-header-wrapper">
+						<div class="term-header">
+							<div class="term-info">
+								<p><b><%= params[:ques_num].to_s == "2" ? "Term: " : "Key Player: " %></b> <%= question.term %></p>
+								<b><p>Currency: </b><%= link_to question.coin.currency_name, coin_path(question.coin.id) %></p>
+								<b><p>Submitted by: </b><%= question.user.username %></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="description">
+						<p><%= question.description %></p>
+						<% if current_user.admin %>
+						<%= link_to "Edit", edit_coin_question_path(question.coin_id, question.id), class: "secondary-small","data-turbolinks"=>"false" %>
+						<% end %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-3" id="side-bar">
+		<% if params[:ques_num].to_s == "2" %>
+			<h2>Top 5 Users:</h2>
+			<% @top5_terms.each do |u| %>
+				<% if u.questions.where(ques_num: 2, accepted: true).count > 0 %>
+				  <li><%= u.username %> : <%= u.questions.where(ques_num: 2, accepted: true).count %></li>
+				<% else %>
+				  <li> --- </li>
+				<% end %>
+			<% end %>
+		<% end %>
+		<% if params[:ques_num].to_s == "3" %>
+			<h2>Top 5 Users:</h2>
+			<% @top5_kp.each do |u| %>
+				<% if u.questions.where(ques_num: 3, accepted: true).count > 0 %>
+					<li><%= u.username %> : <%= u.questions.where(ques_num: 3, accepted: true).count %></li>
+				<% else %>
+					<li> --- </li>
+				<% end %>
+			<% end %>
+		<% end %>
+		<hr>
+	</div>
+
+	<div class="contribute-container-background">
+		<div class="contribute-container">
+			<a href="/donations" class="contribute-container__submit-button secondary-small">
+				Help the Community - Donate
+			</a>
+		</div>
+	</div>
+</div>

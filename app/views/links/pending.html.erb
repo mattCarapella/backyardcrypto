@@ -1,0 +1,33 @@
+<% provide(:title, "Link Submissions") %>
+<div class="links-container">
+	<h2>Pending Link Submissions:</h2><br><hr>
+	<% @pending.each do |link| %>	
+		<% if !link.rejected? %>
+			<% if link.coin.moderator == current_user || current_user.admin %>
+				<div id="link-info">
+					<ul><b>Link Name: </b><%= link.websitename %></ul>
+					<ul><b>URL: </b><%= link.url %></ul>
+					<ul><b>Submitted By: </b><%= link.user.username %></ul>
+					<ul><b>Submitted On: </b><%= link.created_at.strftime('%a %b %d %Y') %></ul>
+					<ul><b>Accepted: </b><%= link.accepted? %></ul>	
+				</div>			
+				<div class="links-container__button-group" id="link-buttons">
+					<%= link_to "Check Submission", coin_link_path(link.coin_id, link.id), class: "secondary-small" %>
+					<% if can? :edit, Link and @coin.moderator == current_user or current_user.admin? %>
+						<%= link_to "Edit", edit_coin_link_path(link.coin.id, link.id), class: "secondary-small"  %>
+					<% end %>
+					<% if  current_user.admin? || @coin.moderator == current_user %>
+		    		<%= link_to (link.accepted ? "Deactivate" : "Activate"), flop_coin_link_path(link.coin_id, link.id), class: "secondary-small" %>
+		    		<%= link_to (link.rejected ? "Restore" : "Reject"), reject_coin_link_path(link.coin_id, link.id), class: "secondary-small" %>
+		  		<% end %>
+				</div>
+				<hr>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+<div class="links-container__button-group">
+	<%= link_to "Back to Submissions", coin_links_path(@coin.id), class: "secondary-small" %>
+	<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small"  %>
+	<%= link_to "All Coins", coins_path, class: "secondary-small"  %>
+</div>

@@ -1,0 +1,18 @@
+<div class="genres-container">
+  <h1>Genres</h1>
+  <div class='genre-container'>
+    <% @genres = Genre.all %>
+    <% @genres.each_slice(4) do |sub_genres| %>
+      <ul class='genre-row'>
+        <% sub_genres.each do |genre| %>
+          <li class='genre'>
+            <%= link_to(genre) do %>
+              <%= image_tag("/assets/images/#{genre.name}.svg") %>
+              <p><%= genre.displayname %></p>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

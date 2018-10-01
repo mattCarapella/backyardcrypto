@@ -1,0 +1,121 @@
+@import '_css_reset';
+@import '_default';
+@import '_variables';
+
+.header-container {
+  position: sticky;
+  top: 0;
+  min-height: 75px;
+  width: 100%;
+  z-index: 1000;
+
+  .alert {
+    box-shadow: none;
+  }
+
+  .navbar {
+    &:before, &:after {
+      content: none;
+    }
+  }
+
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+    padding: 0 80px;
+
+    box-sizing: border-box;
+    border-radius: unset;
+    border: transparent;
+    background: white;
+    border-bottom: 1px solid rgba(125, 125, 125, 0.4);
+
+    @media (max-width: $medium) {
+      padding: 0 20px;
+    }
+
+    div {
+      display: flex;
+    }
+
+    .left-nav {
+      justify-content: flex-start;
+      align-items: center;
+      height: 75px;
+
+      .logo-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+
+        &:hover {
+          background: none;
+        }
+
+        img {
+          height: 60%;
+        }
+      }
+    }
+
+    .right-nav {
+      margin-top: 15px;
+
+      a {
+        margin: 15px;
+        padding: 0;
+        padding-bottom: 5px;
+
+        font-size: 14px;
+        color: #666;
+        font-weight: normal;
+        text-shadow: none;
+
+        &:hover {
+          color: $black;
+          font-weight: bold;
+        }
+      }
+
+      .active {
+        color: $black;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+
+    .focus {
+      padding-bottom: 5px;
+      background: linear-gradient(to right, $left-gradient-blue, $right-gradient-blue) left bottom transparent no-repeat;
+
+      background-size: 100% 3px;
+    }
+  }
+}
+
+#navbar-toggle {
+  display: none;
+  margin-top: 10px;
+
+  color: $gray;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 1;
+}
+
+@media (max-width: $medium) {
+  #navbar-toggle {
+    display: inline-block;
+  }
+
+  #main-nav {
+    list-style-type: none;
+    display: none;
+    flex-direction: column;
+  }
+}

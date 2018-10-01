@@ -1,0 +1,14 @@
+<% provide(:title, "Event Submissions") %>
+<div id="event-index">
+	<% if current_user == @coin.moderator or current_user.admin? %>			
+		<%= render 'events/mod' %>
+	<% else %> 
+		<%= render 'events/user' %> 
+	<% end %>
+</div>
+
+<div class="btn-group">
+	<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small"  %>
+	<%= link_to "Back to All Coins", coins_path, class: "secondary-small"  %>
+	<%= link_to "Submit Another Event", new_coin_event_path(@coin.id), class: "secondary-small"  %>
+</div>

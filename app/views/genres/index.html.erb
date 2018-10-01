@@ -1,0 +1,18 @@
+<% provide(:title, "Genres") %>
+<div id="particles-js"></div>
+<div id="genre-header">
+	<% if current_user and current_user.admin %>
+		<%= link_to "Create Genre", new_genre_path, class: "btn btn-default","data-turbolinks"=>"false" %><hr>
+	<% end %>
+</div>
+
+<div id="genre-index">
+	<%= render 'genres/genres' %>
+	<div class="contribute-container-background">
+		<div class="contribute-container">
+			<a href="/donations" class="contribute-container__submit-button secondary-small">
+				Help the Community - Donate
+			</a>
+		</div>
+	</div>
+</div>

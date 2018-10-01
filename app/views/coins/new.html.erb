@@ -1,0 +1,106 @@
+<% provide(:title, "Submit New Coin") %>
+
+<div class="form-container">
+	<%= simple_form_for @coin, url: coins_path(@coin.id) do |f| %>
+
+		<h2>Submit a New Coin</h2>
+
+		<div class="form-container__section">
+			<h3>Coin Information</h3>
+			<%#= f.input :currency_name, :label => "Coin Name", class: 'form-control' %>
+			<div class="form-container__dropdown">
+				<h4>Coin Name</h4>
+
+				<select id="subcoin" class="form-control">
+					<% if @market_coins.present? %>
+						<% @market_coins.each do |coin| %>
+						<option value=<%= coin[:name] %> data-id = <%= coin[:id] %> data-symbol = <%= coin[:symbol] %> >
+							<%= coin[:name] %>
+						</option>
+						<% end %>
+					<% end %>
+				</select>
+			</div>
+
+			<p class="file-upload-text"><b>Logo</b> (Pictures must be in .jpg, .gif, or .png format and less than 5MB)</p>
+			<%= f.file_field :picture, id: 'file-upload', accept: 'image/jpeg,image/gif,image/png'%>
+			<%= f.input :currency_abbrev,:placeholder => "Currency Abbreviation", label: false, class: 'form-control',input_html: { disabled: true,:value => 'BTC' } %>
+			<%= f.input :founder, :placeholder => "Founder", class: 'form-control', label: false %>
+
+			<div class="form-container__checkbox">
+				<h3>Genres</h3>
+				<%= f.collection_check_boxes :genre_ids, Genre.all, :id, :displayname do |b| %>
+					<%= b.check_box %>
+					<p><%= b.label %></p>
+				<% end %>
+			</div>
+			<!-- <%= f.hidden_field :coinmarket_id, value: 1 %>
+			<%= f.hidden_field :currency_name, value: "Bitcoin" %> -->
+
+			<div class="form-container__dropdown">
+				<h4><b>Mineable</b></h4>	<%= f.select :mineable, options_for_select([[" ", " "],['Yes', true], ['No', false]], :label => "Mineable")%>
+			</div>
+
+			<div class="form-container__dropdown">
+				<h4>Date of ICO</h4>
+				<%= f.input :date_of_ico, label: false, order: [:month, :day, :year], class: 'form-control' %>
+			</div>
+
+			<%= f.input :money_raised_in_ico, label: false, placeholder: "Money Raised in ICO", class: 'form-control' %>
+		</div>
+
+		<div class="form-container__section">
+			<h3>Links</h3>
+			<%= f.input :website, class: 'form-control', label: false, placeholder: "Website" %>
+			<%= f.input :reddit, class: 'form-control', label: false, placeholder: "Reddit" %>
+			<%= f.input :app, class: 'form-control', label: false, placeholder: "App" %>
+			<%= f.input :facebook, class: 'form-control', label: false, placeholder: "Facebook" %>
+			<%= f.input :twitter, class: 'form-control', label: false, placeholder: "Twitter" %>
+			<%= f.input :youtube, class: 'form-control', label: false, placeholder: "YouTube" %>
+			<%= f.input :whitepaper, class: 'form-control', label: false, placeholder: "Whitepaper" %>
+			<%= f.input :discord, class: 'form-control', label: false, placeholder: "Discord" %>
+			<%= f.input :slack, class: 'form-control', label: false, placeholder: "Slack" %>
+			<%= f.input :github, class: 'form-control', label: false, placeholder: "Github" %>
+			<%= f.input :tradingview, class: 'form-control', label: false, placeholder: "TradingView" %>
+			<%= f.input :bitcointalk, class: 'form-control', label: false, placeholder: "Bitcointalk" %>
+			<%= f.input :stackexchange, class: 'form-control', label: false, placeholder: "Stack Exchange" %>
+			<%= f.input :coinmarketcap, class: 'form-control', label: false, placeholder: "CoinMarketCap" %>
+			<%= f.input :gitter, class: 'form-control', label: false, placeholder: "Gitter" %>
+			<%= f.input :blockexplorer, class: 'form-control', label: false, placeholder: "Block Explorer" %>
+		</div>
+
+		<div class="form-container__section">
+			<h3>Exchanges</h3>
+			<%= f.input :bitfinex, class: 'form-control', label: false, placeholder: "Bitfinex" %>
+			<%= f.input :bithumb, class: 'form-control', label: false, placeholder: "bithumb" %>
+			<%= f.input :bitflyer, class: 'form-control', label: false, placeholder: "bitFlyer" %>
+			<%= f.input :hitbtc, class: 'form-control', label: false, placeholder: "HitBTC" %>
+			<%= f.input :kucoin, class: 'form-control', label: false, placeholder: "KuCoin" %>
+			<%= f.input :poloniex, class: 'form-control', label: false, placeholder: "Poloniex" %>
+			<%= f.input :bitstamp, class: 'form-control', label: false, placeholder: "Bitstamp" %>
+			<%= f.input :bittrex, class: 'form-control', label: false, placeholder: "Bittrex" %>
+			<%= f.input :gdax, class: 'form-control', label: false, placeholder: "GDAX" %>
+			<%= f.input :gemini, class: 'form-control', label: false, placeholder: "Gemini" %>
+			<%= f.input :btcc, class: 'form-control', label: false, placeholder: "BTCC" %>
+			<%= f.input :kraken, class: 'form-control', label: false, placeholder: "Kraken" %>
+			<%= f.input :korbit, class: 'form-control', label: false, placeholder: "Korbit" %>
+			<%= f.input :binance, class: 'form-control', label: false, placeholder: "Binance" %>
+			<%= f.input :yorbit, class: 'form-control', label: false, placeholder: "Yorbit" %>
+			<%= f.input :okcoin, class: 'form-control', label: false, placeholder: "OKCoin" %>
+		</div>
+
+		<%= f.button :submit, 'Submit', :class => 'primary-small' %>
+
+	<% end %>
+
+	<script type="text/javascript">
+	  $('#micropost_picture').bind('change', function() {
+	    var size_in_megabytes = this.files[0].size/1024/1024;
+	    if (size_in_megabytes > 5) {
+	      alert('Maximum file size is 5MB. Please choose a smaller file.');
+	    }
+	  });
+	</script>
+
+	<%= link_to "Back to All Coins", coins_path, class: "secondary-small" %>
+</div>

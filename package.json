@@ -1,0 +1,7 @@
+{
+  "name": "byc1",
+  "private": true,
+  "dependencies": {
+    "particles.js": "^2.0.0"
+  }
+}

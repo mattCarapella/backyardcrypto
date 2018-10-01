@@ -1,0 +1,12 @@
+<% provide(:title, "Edit Post") %>
+
+<div class="event-form">
+	<%= simple_form_for @post, url: coin_posts_path(@coin.id) + "/#{@post.id}" do |f| %>
+		<%= f.input :title, :label => "Post Title", class: 'form-control' %>
+		<%= f.input :content, :label => "Text", class: 'form-control' %>
+		<%= f.input :url, :label => "URL", class: 'form-control' %>
+		<%= f.hidden_field :coin_id, value: @coin.id %>
+		<%= f.button :submit, 'Submit' %>
+		<%= link_to "Back", coin_posts_path(@coin.id), class: "btn btn-default" %>
+	<% end %>
+</div>

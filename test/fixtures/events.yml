@@ -1,0 +1,42 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id          :bigint(8)        not null, primary key
+#  content     :text
+#  date        :datetime
+#  coin_id     :integer
+#  user_id     :integer
+#  accepted    :boolean          default(FALSE)
+#  upvotes     :integer          default(0)
+#  downvotes   :integer          default(0)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  link        :string
+#  picture     :string
+#  time        :time
+#  city        :string
+#  state       :string
+#  country     :string
+#  description :text
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  date: 2018-01-23 18:51:02
+  coin_id: 1
+  user_id: 1
+  accepted: false
+  upvotes: 1
+  downvotes: 1
+
+two:
+  content: MyText
+  date: 2018-01-23 18:51:02
+  coin_id: 1
+  user_id: 1
+  accepted: false
+  upvotes: 1
+  downvotes: 1

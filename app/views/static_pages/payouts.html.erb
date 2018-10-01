@@ -1,0 +1,74 @@
+<% provide(:title, "Payouts") %>
+<div id="particles-js"></div>
+<div class="payouts-container">
+  <section class="community-container">
+    <h2>Built by the Community, For the Community</h2>
+    <p>Backyard Crypto’s vision is to deliver technical blockchain knowledge to the world. We can not do this without you, the community.  Together we are going to bring the most up to date information to our fingertips.  Recognizing your help, we are devoting half of all Backyard Crypto’s revenue to the community, through our reward system.</p>
+    <p>We value user uploaded content through a crypto based reward system. Content is valued on quality and relevance. Each page will have a trusted moderator to ensure we have the highest quality, most accurate, and up to date content on every relevant coin.</p>
+    <div class="community-container__buttons-container">
+      <div class="button-group">
+        <h5>Join the Movement</h5>
+        <a href="" class="primary-small">Sign Up</a>
+      </div>
+      <% if current_user %>
+        <% url_path = user_path(current_user) %>
+      <% else %>
+        <% url_path = new_user_session_path %>
+      <% end %>
+      <div class="button-group">
+        <h5>Want to earn?</h5>
+        <a href="<%= url_path %>" class="primary-small">Sign Up & Earn</a>
+      </div>
+      <div class="button-group">
+        <h5>Are you a coin expert?</h5>
+        <a href="https://docs.google.com/forms/d/1WJ265kYGmPBqZl5j_lvHH7HkYbYZGymlC1GbSRdbUPg/edit" class="primary-small">Apply For Moderator</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="award-system-container">
+    <div id="particles-js-dark"></div>
+    <h2>Award System Structure</h2>
+
+    <section class="section-container">
+      <div class="section-container__section-1">1</div>
+      <h3>The Community - 40%</h3>
+      <p>The community Award system is broken down into 5  categories, listed below, that accounts to 40% of all of BYC revenue. 3 sections are awarded to the uploaders of content, while 1 section is devoted to the moderator and super user. The breakdown is as follows:</p>
+      <p><strong>Section 1 (Info Doc):</strong> 3% of proceeds are distributed to section one for 1 year after doc is completed. After 1 year, the 3% transfers to updates payout.<br>
+      <strong>Section 2 ( Overview):</strong> 20% total, 5% per question. Competitive payout, based on quality and relevance. Each question can be paid out up to 5 different people.<br>
+      <strong>Section 3 (RoadMap):</strong> 5% total, .5% per Roadmap update. Payout will include the previous 3 updates and the future 7 updates.</p>
+      <h4>System Administrator: 7%</h4>
+      <h4>Superuser: 5%</h4>
+      <p class="note">Note: Any sections that are not filled out upon the approval of a coin page will have its revenue distributed to the investment pool.</p>
+    </section>
+
+    <section class="section-container">
+      <div class="section-container__section-2">2</div>
+      <h3>The Investment Pool - 20%</h3>
+      <p>The Investment pool accounts to 20% of all proceeds of BYC. The investment pool will be used to purchase mining rigs, nodes, dividend yielding coins, etc. All profits of the investment pool with then be filtered back through the the Backyard Crypto award system (I.e. 40% to the community, 20% to the investment pool, 40% to Backyard Crypto). This pool allows additional, sustainable revenue growth for the site to ensure regular awards. As the investment pool grows, so does the page awards.</p>
+    </section>
+
+    <section class="section-container">
+      <div class="section-container__section-3">3</div>
+      <h3>System Development/Backyard Crypto: 40%</h3>
+      <p>40% of company wide proceeds will be distributed back to Backyard Crypto for system development, overhead, site maintenance, and ensuring Backyard Crypto is your most valuable tool.</p>
+    </section>
+    <section class="award-system-example-container">
+      <div id='particles-js-less-dark'></div>
+      <h2>Award System Example</h2>
+      <%= image_tag('Infographic-payout.png') %>
+      <div class="award-system-example-container__buttons-container">
+        <a href="" class="primary-small">Start Contributing</a>
+        <a href="" class="primary-small">More About our Award System</a>
+      </div>
+      <div class="contribute-container-background">
+        <div class="contribute-container">
+          <a href="/donations" class="contribute-container__submit-button secondary-small">
+            Help the Community - Donate
+          </a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+</div>

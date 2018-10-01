@@ -1,0 +1,81 @@
+<div class="user-profile-container__submitted-questions">
+  <% if @user.questions %>
+    <h4>Active</h4>
+    <div id='accordion'>
+      <% @user.questions.each do |question| %>
+        <% if question.accepted? %>
+          <div class="term-header-wrapper">
+            <div class="term-header">
+              <div class="term-info">
+                <b><p>Coin:</b>
+                <%= link_to question.coin.currency_name, coin_path(question.coin.id) %>
+                </p>
+                <p><b>Question Number: </b><%= question.ques_num %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="description">
+            <div class="info">
+              <p><b>Submitted: </b><%= question.created_at.strftime('%b %d, %Y') %></p>
+              <p><b>Accepted on: </b><%= question.accepted_at.strftime('%b %d, %Y') %></p>
+              <p><b>Active for: </b><%= question.updated_at.time_ago_in_days %></p>
+            </div>
+
+            <div class="button-group">
+              <%= link_to "View", coin_question_path(question.coin_id, question.id), class: "primary-small","data-turbolinks"=>"false" %>
+
+              <% if current_user.admin %>
+                <%= link_to "Edit", edit_coin_question_path(question.coin_id, question.id), class: "secondary-small","data-turbolinks"=>"false" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <h4>Pending Approval</h4>
+    <div id='accordion'>
+      <% @user.questions.each do |question| %>
+        <% if not question.accepted? %>
+          <div class="term-header-wrapper">
+            <div class="term-header">
+              <div class="term-info">
+                <b><p>Coin:</b>
+                <%= link_to question.coin.currency_name, coin_path(question.coin.id) %>
+                </p>
+                <p><b>Question Number: </b><%= question.ques_num %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="description">
+            <div class="info">
+              <p><b>Submitted: </b><%= question.created_at.strftime('%b %d, %Y') %></p>
+            </div>
+
+            <div class="button-group">
+              <%= link_to "View", coin_question_path(question.coin_id, question.id), class: "primary-small","data-turbolinks"=>"false" %>
+
+              <% if current_user.admin %>
+                <%= link_to "Edit", edit_coin_question_path(question.coin_id, question.id), class: "secondary-small","data-turbolinks"=>"false" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(
+    function () {
+      $("#accordion").accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: "content",
+      });
+    });
+
+</script>

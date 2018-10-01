@@ -1,0 +1,7 @@
+<ul><b>Event: </b><%= @event.content %></ul>
+<ul><b>Category: </b><%= @event.coin.currency_name %></ul>
+<ul><b>Link: </b><%= @event.link %></ul>
+<ul><b>Date: </b><%= @event.date.strftime('%a %b %d %Y')  %></ul>
+<ul><b>Location: </b><%= @event.city %>, <%= @event.state %>, <%= @event.country %></ul>
+<ul><b>Description: </b><%= @event.description %></ul>
+<ul><b>Submitted by User: </b><%= @event.user.username %></ul>

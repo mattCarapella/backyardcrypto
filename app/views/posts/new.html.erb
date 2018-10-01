@@ -1,0 +1,16 @@
+<% provide(:title, "Submit New Post") %>
+
+<div class="form-container">
+	<%= simple_form_for @post, url: coin_posts_path(@coin.id) do |f| %>
+	<div class="form-container__section">
+		<%= f.input :title, label: false, placeholder: "Post Title", class: 'form-control' %>
+		<%= f.input :content, label: false, placeholder: "Text", class: 'form-control' %>
+		<%= f.input :url, label: false, placeholder: "URL", class: 'form-control' %>
+		<%= f.hidden_field :coin_id, value: @coin.id %>
+		<div class="form-container__horizontal-button-group">
+			<%= f.button :submit, 'Submit', class: "primary-small" %>
+			<%= link_to "Back", coin_posts_path(@coin.id), class: "secondary-small" %>
+		</div>
+	</div>
+	<% end %>
+</div>

@@ -1,0 +1,55 @@
+@import '_css_reset';
+@import '_default';
+@import '_variables';
+
+.donations-container {
+  margin-top: 75px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+
+  h2 {
+    margin-bottom: 40px;
+  }
+
+  >p {
+    margin-bottom: 80px;
+    width: 30%;
+
+    color: $gray;
+    line-height: 30px;
+    text-align: center;
+  }
+
+  &__button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 100px;
+
+    a {
+      margin-bottom: 30px;
+      width: 20%;
+
+      &:hover {
+        background: $primary-blue;
+      }
+    }
+
+    img {
+      height: 18px;
+      margin-right: 10px;
+    }
+
+    p {
+      margin: 0;
+      color: white;
+      font-family: $default-font-family;
+    }
+  }
+}

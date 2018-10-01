@@ -1,0 +1,12 @@
+<% provide(:title, "Pending Event Submissions") %>
+<h3>Pending Events</h3><hr>
+
+<% @pending.each do |event| %>
+	<%= render partial: 'event', locals: {event: event} %>
+<% end %>
+
+<div class="btn-group">
+	<%= link_to "Back to Events", coin_events_path(@coin.id), class: "secondary-small" %>
+	<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small"  %>
+	<%= link_to "Back to All Coins", coins_path, class: "secondary-small"  %>
+</div>

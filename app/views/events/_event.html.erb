@@ -1,0 +1,44 @@
+<% if !event.rejected %>
+	<ul><b>Event: </b><%= event.content %></ul>
+	<ul><b>Category: </b><%= event.coin.currency_name %></ul>
+	<ul><b>Link: </b><%= link_to event.link,  "http://#{event.link}" %></ul>
+	<ul><b>Date: </b><%= event.date.strftime('%a %b %d %Y') if defined?(event.date) %></ul>
+	<ul><b>Location: </b><%= event.city %>, <%= event.state %>, <%= event.country %></ul>
+	<ul><b>Description: </b><%= event.description %></ul>
+	<ul><b>Submitted by: </b><%= event.user.username %></ul>
+	<% if can? :edit, Coin %>
+		<ul><b>Accepted: </b><%= event.accepted %></ul>
+	<% end %>
+
+	<% up = Float(event.get_upvotes.size) %>
+	<% down = Float(event.get_downvotes.size) %>				
+	<% total = Float(up + down) %>
+	<% if total > 0 %>
+		<b>Approval Rating: </b><%= (up/total*100).round(2) %>
+	<% else %>
+		<b>Approval Rating: </b>n/a
+	<% end %> 
+
+	<div class="btn-group" id="event-buttons">		
+		<%= link_to like_coin_event_path(event.coin.id, event.id), method: :put, class: "secondary-small"  do %>
+			<span class="glyphicon glyphicon-chevron-up"></span>	
+			<%= event.get_upvotes.size %>
+		<% end %>
+		<%= link_to dislike_coin_event_path(event.coin.id, event.id), method: :put, class: "secondary-small"  do %>
+			<span class="glyphicon glyphicon-chevron-down "></span>
+			<%= event.get_downvotes.size %>
+		<% end %>
+		<br><br>
+
+		<div class="links-container__button-group" id="link-buttons">
+			<% if  current_user.admin? || @coin.moderator == current_user %>
+				<%= link_to "View Event", coin_event_path(event.coin_id, event.id), class: "secondary-small"   %>
+				<%= link_to "Edit", edit_coin_event_path(event.coin_id, event.id), class: "secondary-small"  %>
+		    <%= link_to (event.accepted ? "Deactivate" : "Activate"), flop_coin_event_path(event.coin_id, event.id), class: "secondary-small" %>
+		    <%= link_to (event.rejected ? "Restore" : "Reject"), reject_coin_event_path(event.coin_id, event.id), class: "secondary-small" %>
+		  <% end %>
+		 </div>
+		 
+	</div>
+	<hr>
+<% end %>	

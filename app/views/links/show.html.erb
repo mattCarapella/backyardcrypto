@@ -1,0 +1,27 @@
+<% provide(:title, "#{link.websitename}") %>
+
+<div class="link-container">
+	<div class="link-container__link-info">
+		<p><b>Name: </b><%= @link.websitename %></p>
+		<p><b>URL: </b><%= @link.url %></p>
+		<p><b>Submitted By: </b><%= @link.user.username %> </p>
+		<p><b>Submitted On: </b><%= @link.created_at.strftime('%a %b %d %Y') %></p>
+		<p><b>Last Updated: </b><%= @link.updated_at.strftime('%a %b %d %Y') %></p>
+		<p><b>Accepted: </b><%= @link.accepted %></p>
+	</div>
+
+	<div class="link-container__button-group">
+		<% if can? :edit, Link and @coin.moderator == current_user or current_user.admin? %>
+			<%= link_to "Edit", edit_coin_link_path(@link.coin_id, @link.id), class: "secondary-small" %>
+		<% end %>
+		<% if  current_user.admin? || @coin.moderator == current_user %>
+	    <%= link_to (@link.accepted ? "Deactivate" : "Activate"), flop_coin_link_path(@link.coin_id, @link.id), class: "secondary-small" %>
+	    <%= link_to (@link.rejected ? "Restore" : "Reject"), reject_coin_link_path(@link.coin_id, @link.id), class: "secondary-small" %>
+	  <% end %>
+		<% if can? :edit, Link and @coin.moderator == current_user or current_user.admin? %>
+			<%= link_to "Back to Submissions", coin_links_path(@coin.id), class: "secondary-small" %>
+		<% end %>
+		<%= link_to "Back to #{@link.coin.currency_name}", coin_path(@coin.id), class: "secondary-small" %>
+		<%= link_to "Submit Another Link", new_coin_link_path(@coin.id), class: "secondary-small","data-turbolinks"=>"false" %>
+	</div>
+</div>

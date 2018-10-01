@@ -1,0 +1,8 @@
+<%= link_to "Pending Events", pending_coin_events_path(@coin.id), class: "secondary-small"  %>
+<% if current_user.admin? %>	
+	<%= link_to "Rejected Events", rejected_coin_events_path(@coin.id), class: "secondary-small" %>
+<% end %>
+<hr>
+<% @accepted.each do |event| %>
+	<%= render partial: 'event', locals: {event: event} %>
+<% end %>

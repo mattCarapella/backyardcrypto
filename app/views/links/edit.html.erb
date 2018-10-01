@@ -1,0 +1,22 @@
+<% provide(:title, "Edit Link") %>
+<h1> Edit Link </h1>
+<% if can? :edit, Link and current_user = @link.coin.moderator %>
+	<div id="edit-link">
+		<%= simple_form_for @link, url: coin_link_path(@coin.id) do |f| %>	
+			<%= f.input :websitename, :label => "Website Name", class: 'form-control' %>
+			<%= f.input :url, :label => "URL", class: 'form-control' %>
+			<%= f.hidden_field :coin_id, value: @coin.id %>
+
+<!-- 			<% if can? :edit, Coin %>
+				Accept?<br>
+				<%#= f.select :accepted, options_for_select([[" ", " "],['Yes', true], ['No', false]]) %>
+				<%= f.select :accepted, options_for_select([[@link.accepted == true ? 'Yes' : 'No', @link.accepted == true ? true : false], [@link.accepted == true ? 'No' : 'Yes', @link.accepted == true ? false : true]]) %>
+			<% end %> -->
+
+			<%= hidden_field_tag(:coin_id, @coin.id) %>
+			<%= f.button :submit, 'Submit', class: "secondary-small" %>
+			<%= link_to "Back", coin_links_path(@coin.id), class: "secondary-small" %>
+			<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small" %>
+		<% end %>
+	</div>
+<% end %>

@@ -1,0 +1,24 @@
+<% provide(:title, "Submit a Link") %>
+
+<div class="form-container">
+	<%= simple_form_for @link, url: coin_links_path(@coin.id) do |f| %>
+
+		<h2>Submit a New Link</h2>
+		<div class="form-container__section">
+
+			<!-- [1]- Exchange ||  [2]-  Wallet || [3]-   Other links -->
+<!-- 			<div class="form-container__dropdown">
+				<%= f.select :accepted, options_for_select([["#{@coin.currency_name} Exchange", 1], ["#{@coin.currency_name} Wallet", 2], ["#{@coin.currency_name} Links", 3]])%>
+			</div>
+ -->
+			<%= f.input :websitename, label: false, placeholder: "Website", class: 'form-control' %>
+			<%= f.input :url, label: false, placeholder: "URL", class: 'form-control' %>
+			<%= f.hidden_field :link_type, value: "" %>
+			<%= f.hidden_field :coin_id, value: @coin.id %>
+			<div class='form-container__horizontal-button-group'>
+				<%= f.button :submit, 'Submit', class: 'primary-small' %>
+				<%= link_to "Back", coin_path(@coin.id), class: "secondary-small" %>
+			</div>
+		</div>
+	<% end %>
+</div>

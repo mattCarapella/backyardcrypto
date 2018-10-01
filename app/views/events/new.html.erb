@@ -1,0 +1,21 @@
+<% provide(:title, "Submit an Event") %>
+<div class="form-container">
+	<%= simple_form_for @event, url: coin_events_path(@coin.id) do |f| %>
+	<h2>Add New <%= @coin.currency_name %> Event</h2>
+	<div class="form-container__section">
+		<%= f.input :content, label: false, placeholder: "Event Name", class: 'form-control' %>
+		<%= f.input :link, label: false, placeholder: "Link to Event", class: 'form-control' %>
+		<%= f.input :date, order: [:month, :day, :year], class: 'form-control' %>
+		<!--	<%= f.input :time, as: :time, html5: true, class: 'form-control' %> -->
+		<%= f.input :city, label: false, placeholder: "City", class: 'form-control' %>
+		<%= f.input :state, :as => :select, :collection => us_states, label: false, prompt: "State" %>
+		<%= f.input :country, :as => :select, :collection => countries, class: 'form-control', label: false, prompt: "Country" %>
+		<br>
+		<%= f.input :description, label: false, placeholder: "Event Description", class: 'form-control' %>
+		<div class="form-container__horizontal-button-group">
+			<%= f.button :submit, 'Submit', class: 'primary-small' %>
+			<%= link_to "Back", coin_path(@coin.id), class: "secondary-small" %>
+		</div>
+	</div>
+	<% end %>
+</div>

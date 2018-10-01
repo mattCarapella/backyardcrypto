@@ -1,0 +1,12 @@
+<% provide(:title, @genre.name) %>
+<% @coins_in_genre = @genre.coins %>
+
+<div class="genre-container">
+  <h2><%= @genre.displayname %></h2>
+  <% @coins_in_genre.each do |coin| %>
+    <% if coin.accepted %>
+        <%= image_tag coin.picture if coin.picture? %>
+        <%= link_to coin.currency_name, coin_path(coin.id), :action => 'show', :id => coin %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,17 @@
+<h1>Create Genre</h1>
+
+<div class="form-container">
+	<% if can? :create, Genre and current_user.admin? %>
+		<%= simple_form_for @genre, url: genres_path do |f| %>
+			<h2>Submit New Genre</h2>
+			<div class="form-container__section">
+				<%= f.input :name, label: false, placeholder: "Genre Name", class: 'form-control' %>
+				<%= f.input :displayname, label: false, placeholder: "Display Name", class: 'form-control' %>
+				<div class="form-container__horizontal-button-group">
+					<%= f.button :submit, 'Submit', class: "primary-small" %>
+					<%= link_to "Back", genres_path, class: "secondary-small" %>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+</div>

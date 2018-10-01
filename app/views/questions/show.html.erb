@@ -1,0 +1,100 @@
+<% provide(:title, "Answer Submissions") %>
+
+<% if @user == @question.coin.moderator || current_user.admin %>
+
+	<div class="question-container">
+
+		<h3><b>Currency: </b><%= @question.coin.currency_name %></h3>
+		<h4><b>Question Number: </b><%= @question.ques_num %></h4>
+		<h4><b>Submitted by User: </b><%= @question.user.username %></h4>
+		<hr>
+
+			<!-- For refactoring -->
+		<div class="question-text">
+			<% if @question.ques_num == 2 %>
+			<p><b>Term:</b> <br>
+				<%= @question.term %></p><br>
+				<p><b>Term definition:</b> <br>
+					<%= @question.description %></p>
+
+			<% elsif @question.ques_num == 3 %>
+				<p><b>Key player:</b> <br>
+					<%= @question.term %></p><br>
+					<p><b>Key player definition:</b> <br>
+						<%= @question.description %></p>
+
+			<% else %>
+						<!-- 		<div class="display_content"  style="display:none;">
+						<div id="view_question" class="content-question" contenteditable="true" style="outline: none;">
+						<%= @question.content %>
+					</div>
+				</div> -->
+				<p><%= @question.content.html_safe %></p>
+			<% end %>
+
+		</div>
+		
+		<% if @coin.moderator == current_user || current_user.admin %>
+			<p><b>Accepted:</b> <%= @question.accepted? %></p><br>
+		<% end %>
+
+		<div class="form-container__horizontal-button-group">
+
+			<% if @coin.moderator == current_user || current_user.admin %>
+
+				<%= link_to "Edit Question", edit_coin_question_path(@question.coin_id), class: "primary-small","data-turbolinks"=>"false" %>
+
+				<% if @question.ques_num == 2 %>
+					<%= link_to "Back to Submissions", coin_questions_path(@coin.id, :ques_num => 2), class: "secondary-small" %>
+				<% elsif @question.ques_num == 3 %>
+					<%= link_to "Back to All Submissions", coin_questions_path(@coin.id, :ques_num => 3), class: "secondary-small" %>
+				<% end %>
+
+				<% if current_user.admin? %>
+					<%= link_to "Delete", coin_question_path(@question.coin_id, @question.id), method: :delete, data: { confirm: "Do you 	want to delete this submission?" }, class: "secondary-small" %>
+				<% end %>
+
+			<% end %>
+
+			<% if can? :update, @coin %>
+				<%= link_to "Back to #{@question.coin.currency_name}", coin_path(@coin.id, :ques_num => @question.ques_num), class: "secondary-small","data-turbolinks"=>"false" %>
+			<% else %>
+				<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small" %>
+				<%= link_to "Back to All Coins", coins_path, class: "secondary-small" %>
+			<% end %>
+		</div>
+
+
+	</div>
+
+<% elsif @question.ques_num == 2 || @question.ques_num == 3 %>
+		<div class="question-text">
+			<% if @question.ques_num == 2 %>
+			<p><b>Term:</b> <br>
+				<%= @question.term %></p><br>
+				<p><b>Term definition:</b> <br>
+					<%= @question.description %></p>
+
+			<% elsif @question.ques_num == 3 %>
+				<p><b>Key player:</b> <br>
+					<%= @question.term %></p><br>
+					<p><b>Key player definition:</b> <br>
+						<%= @question.description %></p>
+
+			<% else %>
+						<!-- 		<div class="display_content"  style="display:none;">
+						<div id="view_question" class="content-question" contenteditable="true" style="outline: none;">
+						<%= @question.content %>
+					</div>
+				</div> -->
+				<p><%= @question.content.html_safe %></p>
+			<% end %>
+
+		</div>
+		<b>Currency: </b><%= @question.coin.currency_name %>
+		<b>Submitted On: </b><%= @question.created_at %>
+		<hr>
+
+<% end %>
+
+

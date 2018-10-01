@@ -1,0 +1,106 @@
+<div class="questions-container">
+	<h2><center>Submissions</center></h2>
+
+	<% @questions.each do |question| %>
+		<div class="questions-container__content">
+			<div class="questions-container__accepted-content">
+				<% if question.accepted? %>
+				<!-- For refactoring -->
+				<% if question.ques_num == 2 %>
+				<p><b>Term:</b> <%= question.term %></p>
+				<p><b>Term definition:</b> <%= question.description %></p>
+				<% elsif question.ques_num == 3 %>
+				<p><b>Key player:</b> <%= question.term %></p>
+				<p><b>Key player definition:</b> <%= question.description %></p>
+				<% else %>
+				<!-- <ul class= "msg-res">Content:<%= truncate(question.content.html_safe, length: 400)%></ul> -->
+				<ul>
+					<div style="padding-bottom: 13px;">Content: </div>
+					<div class="display_content"  style="display:none;">
+						<div id="view_question" class="content-question" contenteditable="true" style="outline: none;">
+							<%= question.content.html_safe %>
+						</div>
+					</div>
+				</ul>
+				<% end %>
+
+				<p><b>Currency: </b><%= question.coin.currency_name %></p>
+				<p><b>Question Number: </b><%= question.ques_num %></p>
+				<p><b>Submitted by User: </b><%= question.user.email %>, <b>user ID: </b><%= question.user.id %></p>
+				<p><b>Submitted on: </b><%= question.created_at.strftime('%b %d, %Y') %></p>
+
+				<% if current_user == question.coin.moderator %>
+				<p><b>Accepted: </b><%= question.accepted %></p>
+				<% end %>
+			</div>
+
+			<%= link_to "Check Submission", coin_question_path(question.coin_id, question.id), class: "secondary-small","data-turbolinks"=>"false" %>
+			<hr>
+
+		<% end %>
+	<% end %>
+
+	<% if @coin.moderator == @user || @user.admin? %>
+
+		<h4>Submissions Pending Approval:</h4>
+
+		<% @questions.each do |question| %>
+		<% if not question.accepted? %>
+		<!-- For refactoring -->
+		<% if question.ques_num == 2 %>
+		<ul>Term: <%= question.term %></ul>
+		<ul>Term definition: <%= question.description %></ul>
+		<% elsif question.ques_num == 3 %>
+		<ul>Key player: <%= question.term %></ul>
+		<ul>Key player definition: <%= question.description %></ul>
+		<% else %>
+		<!-- <ul class= "msg-res">Content:<%= truncate(question.content.html_safe, length: 400)%></ul> -->
+		<ul>
+			<div style="padding-bottom: 13px;">Content: </div>
+
+			<!-- 			<div  class= "msg-res">
+			<%= question.content.html_safe %>
+		</div> -->
+
+		<div class="display_content"  style="display:none;">
+
+			<div id="view_question" class="content-question" contenteditable="true" style="outline: none;">
+				<%= question.content.html_safe %>
+			</div>
+
+			<div id="main_question" class= "display_content" >
+
+			</div>
+
+		</div>
+
+		<%#= question.content.html_safe %>
+
+	</ul>
+	<% end %>
+	<ul><b>Currency: </b><%= question.coin.currency_name %></ul>
+	<ul><b>Question Number: </b><%= question.ques_num %></ul>
+	<ul><b>Submitted by User: </b><%= question.user.email %>, <b>user ID: </b><%= question.user.id%></ul>
+	<ul><b>Submitted on: </b><%= question.created_at.strftime('%b %d, %Y') %></ul>
+
+	<% if can? :destroy, :question %>
+	<ul><b>Accepted: </b><%= question.accepted %></ul>
+	<% end %>
+	<ul><%= link_to "Check Submission", coin_question_path(question.coin_id, question.id), class: "btn btn-default","data-turbolinks"=>"false" %></ul>
+
+	<hr>
+
+	<% end %>
+	<% end %>
+	<% end %>
+
+	</div>
+
+	<br>
+	<br>
+
+	<div class="form-container__horizontal-button-group">
+		<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small" ,"data-turbolinks"=>"false" %>
+		<%= link_to "All Coins", coins_path, class: "secondary-small" %>
+	</div>
+</div>

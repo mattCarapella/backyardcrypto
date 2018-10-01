@@ -1,0 +1,28 @@
+<% provide(:title, "#{@event.content}") %>
+<div id="link-info">
+	<% if can? :edit, @event %>
+			<ul><b>Event: </b><%= @event.content %></ul>
+			<ul><b>Category: </b><%= @event.coin.currency_name %></ul>
+			<ul><b>Link: </b><%= link_to @event.link, "http://#{@event.link}" %></ul>
+			<ul><b>Date: </b><%= @event.date.strftime('%a %b %d %Y')  %></ul>
+			<ul><b>Location: </b><%= @event.city %>, <%= @event.state %>, <%= @event.country %></ul>
+			<ul><b>Description: </b><%= @event.description %></ul>
+			<ul><b>Submitted by User: </b><%= @event.user.username %></ul>
+			<% if current_user == @event.coin.moderator or current_user.admin? %>
+				<ul><b>Accepted: </b><%= @event.accepted? %></ul>
+<!-- 				<ul><b>Rejected: </b><%= @event.rejected? %></ul>
+				<ul><b>Pending: </b><%= @event.pending? %></ul> -->
+			<% end %>
+		<br>
+	<% end %>
+</div>
+<br>
+<div class="links-container__button-group" id="link-buttons">
+	<% if  current_user.admin? || @coin.moderator == current_user %>	
+		<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small" %>
+		<%= link_to "Back to Events", coin_events_path(@coin.id), class: "secondary-small" %>
+		<%= link_to (@event.rejected ? "Restore" : "Reject"), reject_coin_event_path(@event.coin_id, @event.id), class: "secondary-small" %>
+	 <%= link_to (@event.accepted ? "Deactivate" : "Activate"), flop_coin_event_path(@event.coin_id, @event.id), class: "secondary-small" %>
+		<%= link_to "Edit", edit_coin_event_path(@event.coin_id, @event.id), class: "secondary-small" %>	
+	<% end %>
+</div>

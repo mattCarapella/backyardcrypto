@@ -1,0 +1,104 @@
+<div class="questions-container">
+
+	<div class="questions-container__question-section">
+		<h4>General Overview</h4>
+		<% if @coin.question1.present? %>
+			<!-- <p><%#= simple_format(@coin.question1) %></p>		 -->
+			<div class="display_content"  style="display:none;">
+				<div id="view_question" class="content-question" contenteditable="true" style="outline: none;">
+					<p><%= @coin.question1.html_safe %></p>
+				</div>
+				<div id="main_question">
+				</div>
+			</div>
+		<% end %>
+
+		<div class="buttons-group">
+			<div class="secondary-actions">
+				<% if can? :edit, Coin and @coin.moderator == current_user %>
+					<%= link_to "#{@q1 > 0 ? "(#{@q1}) New Submission(s)" : "View Submissions"}", coin_questions_path(@coin.id, :ques_num => 1), class: "secondary-small","data-turbolinks"=>"false" %>
+				<% end %>
+				<% if can? :edit, Coin and @coin.moderator == current_user %>
+					<%= link_to "Edit Answers", edit_coin_question_path(coin_id: @coin.id, id: @question1.first.id), class: "secondary-small" %>
+				<% end %>
+			</div>
+			<%= link_to "Submit an Answer", new_coin_question_path(@coin.id, :ques_num => 1) , class: "primary-small","data-turbolinks"=>"false" %>
+		</div>
+	</div>
+
+
+	<div class="questions-container__question-section">
+		<h4>Terminology</h4>
+		<% terms = Question.where("ques_num=? AND accepted=? AND coin_id=?",2,true, @coin.id) %>
+		<% terms.each do |t| %>
+			<div class="term-container">
+				<div class="term-container__header">
+					<h5><%= t.term %></h5>
+					<%= link_to "Submit New Definition", edit_coin_question_path(coin_id: @coin.id, id: t.id), class: "default-link" %>
+				</div>
+				<div class="term-container__definition">
+					<p><%= t.description %></p>
+				</div>
+			</div>
+		<% end %>
+		<% if @coin.question2 %>
+			<p><%= simple_format(@coin.question2) %></p>
+		<% end %>
+		<div class="buttons-group">
+			<div class="secondary-actions">
+				<% if can? :edit, Coin and @coin.moderator == current_user %>
+					<%= link_to "#{@q2 > 0 ? "(#{@q2}) New Submission(s)" : "View Submissions"}", coin_questions_path(@coin.id, :ques_num => 2), class: "secondary-small" %>
+				<% end %>
+			</div>
+			<%= link_to "Submit an Answer", new_coin_question_path(@coin.id, :ques_num => 2), class: "primary-small" %>
+		</div>
+	</div>
+
+	<div class="questions-container__question-section">
+		<h4>Key Players</h4>
+		<% terms = Question.where("ques_num=? AND accepted=? AND coin_id=?",3,true, @coin.id) %>
+		<% terms.each do |t| %>
+		<div class="term-container">
+			<div class="term-container__header">
+				<a href="display/questions?ques_num=3" class="default-link"><%= t.term %></a>
+			</div>
+			<div class="term-container__definition">
+				<p><%= t.description %></p>
+			</div>
+		</div>
+		<% end %>
+		<% if @coin.question3 %>
+			<p><%= simple_format(@coin.question3) %></p>
+		<% end %>
+		<div class="buttons-group">
+			<div class="secondary-actions">
+				<% if can? :edit, Coin and @coin.moderator == current_user %>
+					<%= link_to "#{@q3 > 0 ? "(#{@q3}) New Submission(s)" : "View Submissions"}", coin_questions_path(@coin.id, :ques_num => 3), class: "secondary-small" %>
+				<% end %>
+			</div>
+			<%= link_to "Submit an Answer", new_coin_question_path(@coin.id, :ques_num => 3), class: "primary-small" %>
+		</div>
+	</div>
+
+	<div class="questions-container__question-section">
+		<h4>In Depth Analysis </h4>
+		<% if @coin.question4.present? %>
+			<%#= q4 = @coin.question4 %>
+			<div class="display_content4"  style="display:none;">
+				<div id="view_question4" class="content-question" contenteditable="true" style="outline: none;">
+					<p><%= @coin.question4.html_safe %></p>
+				</div>
+				<div id="main_question4" >
+				</div>
+			</div>
+		<% end %>
+		<div class="buttons-group">
+			<div class="secondary-actions">
+				<% if can? :edit, Coin and @coin.moderator == current_user %>
+					<%= link_to "#{@q4 > 0 ? "(#{@q4}) New Submission(s)" : "View Submissions"}", coin_questions_path(@coin.id, :ques_num => 4), class: "secondary-small","data-turbolinks"=>"false" %>
+				<% end %>
+			</div>
+			<%= link_to "Submit an Answer", new_coin_question_path(@coin.id, :ques_num => 4), class: "primary-small","data-turbolinks"=>"false" %>
+		</div>
+	</div>
+</div>

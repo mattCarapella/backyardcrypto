@@ -1,0 +1,222 @@
+// Place all the styles related to the payouts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import '_css_reset';
+@import '_default';
+@import '_variables';
+
+.payouts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 75px;
+
+  overflow: hidden;
+
+  .community-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 75px;
+    width: 750px;
+
+    text-align: center;
+
+    h2 {
+      margin-bottom: 30px;
+    }
+
+    p {
+      margin-bottom: 30px;
+      width: 75%;
+
+      color: $gray;
+      line-height: 25px;
+    }
+
+    &__buttons-container {
+      display: flex;
+      justify-content: space-between;
+      width: 75vw;
+
+      @media screen and (max-width: $medium) {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .button-group {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+
+        a {
+          color: white;
+          min-width: 100px;
+
+          &:hover {
+            color: $primary-blue;
+            border: 1px solid $primary-blue;
+          }
+        }
+
+        @media screen and (max-width: $medium) {
+          margin-bottom: 20px;
+
+          a {
+            min-width: 175px;
+          }
+        }
+      }
+    }
+  }
+
+  .award-system-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    h2 {
+      color: white;
+      margin-top: 100px;
+      margin-bottom: 50px;
+    }
+
+    .section-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 15px;
+      width: 750px;
+
+      color: white;
+      font-size: 20px;
+      line-height: 40px;
+      font-family: $default-font-family;
+
+      text-align: center;
+
+      &__section-1 {
+        height: 40px;
+        width: 40px;
+        margin-bottom: 10px;
+
+        border-radius: 25px;
+        background: linear-gradient(to right, $left-gradient-blue, $right-gradient-blue);
+      }
+
+      &__section-2 {
+        height: 40px;
+        width: 40px;
+        margin-bottom: 10px;
+
+        border-radius: 25px;
+        background: linear-gradient(to bottom right, #4f3ab0, #9f69c6);
+      }
+
+      &__section-3 {
+        height: 40px;
+        width: 40px;
+        margin-bottom: 10px;
+
+        border-radius: 25px;
+        background: linear-gradient(to bottom, #dd5661, #a12856);
+      }
+
+      h3, h4 {
+        color: white;
+      }
+
+      h3 {
+        margin-bottom: 15px;
+      }
+
+      h4 {
+        margin-bottom: 10px;
+      }
+
+      p {
+        margin-bottom: 40px;
+        width: 85%;
+
+        color: $gray;
+        line-height: 28px;
+      }
+
+      .note {
+        width: 50%;
+
+        font-size: 12px;
+      }
+
+      strong {
+        font-weight: bold;
+        color: white;
+      }
+    }
+  }
+
+  .award-system-example-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    width: 120%;
+
+    border-radius: 50%/300px 300px 0 0;
+
+    h2 {
+      color: white;
+      margin-top: 100px;
+      margin-bottom: 50px;
+    }
+
+    img {
+      width: 75vw;
+    }
+
+    &__buttons-container {
+      display: flex;
+      margin: 70px 0;
+
+      >a {
+        margin: 20px;
+
+        color: white;
+
+        &:hover {
+          color: $primary-blue;
+          border: 1px solid $primary-blue;
+        }
+      }
+
+      @media screen and (max-width: $medium) {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+}
+
+#particles-js-dark {
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+
+  background-color: #1D1D1D;
+}
+
+#particles-js-less-dark {
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+
+  border-radius: 50%/300px 300px 0 0;
+  background-color: $black;
+}

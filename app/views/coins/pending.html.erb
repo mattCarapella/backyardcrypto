@@ -1,0 +1,24 @@
+<% provide(:title, "Coins") %>
+<div id="particles-js"></div>
+<div id="coins-index">
+	<table class='coins-container'>
+		<% @coins.each do |coin| %>						
+			<% if !coin.accepted %>
+				<%= link_to coin.currency_name, coin_path(coin.id), :action => 'show', :id => coin %>			
+			<% end %>
+		<% end %>
+	</table>
+
+</div>
+
+<%= javascript_include_tag 'coins' %>
+
+<script>
+	function openNav() {
+	  document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}
+</script>

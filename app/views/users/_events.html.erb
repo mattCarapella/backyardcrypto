@@ -1,0 +1,43 @@
+<div class="user-profile-container__submitted-events">
+  <% if @user.events %>
+  <u><b>III: Road Map</b></u><br><br>
+
+  <b>Active:</b><br>
+  <% @user.events.each do |event| %>
+  <% if event.accepted? %>
+  <ul><b>Event: </b><%= event.content %></ul>
+  <ul><b>Coin: </b><%= event.coin.currency_name %></ul>
+  <ul><b>Submitted on: </b><%= event.created_at.strftime('%b %d, %Y') %></ul>
+  <ul><b>Approved for: </b><%= event.updated_at.time_ago_in_days %></ul>
+  <ul><b>Reward Details: </b> </ul>
+  <ul><%= link_to "View Submission", coin_event_path(event.coin_id, event.id), class: "btn btn-default" %></ul>
+  <br>
+  <% end %>
+  <% end %>
+
+  <b>Pending Approval:</b><br><br>
+  <% @user.events.each do |event| %>
+  <% if not event.accepted? %>
+  <ul><b>Coin: </b><%= event.coin.currency_name %></ul>
+  <ul><b>Event: </b><%= event.content %></ul>
+  <ul><b>Submitted on: </b><%= event.created_at.strftime('%b %d, %Y') %></ul>
+  <ul><b>Approved for: </b><%= event.updated_at.time_ago_in_days %></ul>
+  <ul><b>Reward Details: </b> </ul>
+  <ul><%= link_to "View Submission", coin_event_path(event.coin_id, event.id), class: "btn btn-default" %></ul>
+  <br>
+  <% end %>
+  <% end %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(
+    function () {
+      $("#accordion").accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: "content",
+      });
+    });
+
+</script>

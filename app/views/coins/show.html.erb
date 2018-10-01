@@ -1,0 +1,70 @@
+<% provide(:title, @coin.currency_name) %>
+
+<% response = HTTParty.get("https://api.coinmarketcap.com/v2/ticker/#{@coin.coinmarket_id}/") %>
+<% cryptocompare_response = HTTParty.get("https://www.cryptocompare.com/api/data/coinlist/")%>
+
+<% if response['data'] %>
+  <% @id_ = response['data']["id"] %>
+  <% @name_ = response['data']["name"] %>
+  <% @symbol_ = response['data']["symbol"] %>
+  <% @rank_ = response['data']["rank"] %>
+  <% @price_usd_ = response['data']['quotes']['USD']["price"] %>
+  <% @price_btc_ = response['data']["price_btc"] %>
+  <% @market_cap_usd_ = response['data']['quotes']['USD']["market_cap"] %>
+  <% @circulating_supply_ = response['data']["circulating_supply"] %>
+  <% @total_supply_ = response['data']["total_supply"] %>
+  <% @max_supply_ = response['data']["max_supply"] %>
+  <% @percent_change_1h_ = response['data']['quotes']['USD']["percent_change_1h"] %>
+  <% @percent_change_24h_ = response['data']['quotes']['USD']["percent_change_24h"] %>
+  <% @percent_change_7d_ = response['data']['quotes']['USD']["percent_change_7d"] %>
+<% end %>
+
+<% if cryptocompare_response['Data'] %>
+  <% @img_url_ = cryptocompare_response['BaseImageUrl'] + cryptocompare_response['Data'][@symbol_.upcase]['ImageUrl'] %>
+<% end %>
+
+<div class="coin-container">
+  <%= render 'coins/coinheader' %>
+  <div class="coin-container__admin-toolbar">
+    <% if @user.admin? %> 
+      <%= link_to (@coin.accepted ? "Deactivate" : "Activate"), flop_coin_path(@coin), class: "secondary-small" %>
+      <% if @coin.moderator.nil? %>        
+          <h4>Admin Toolbar</h4>
+          <div class="admin-form-container">
+            <%= simple_form_for @coin do |f| %>
+              <%= f.text_field :moderator_email, placeholder: "Enter user email to make moderator:" %>
+              <%#= f.text_field :moderator_email,value: @coin.moderator.email %>
+              <%= f.submit "Make Moderator", class: 'primary-small' %>
+            <% end %>
+          </div>       
+      <% else %>
+        <div class="admin-form-container">
+          <%= simple_form_for @coin do |f| %>
+            <%= f.text_field :moderator_email, placeholder: "Enter user email to make moderator:" %>
+            <%#= f.text_field :moderator_email,value: @coin.moderator.email %>
+            <%= f.submit "Update Moderator", class: 'primary-small' %>
+          <% end %>
+        </div>                   
+      <% end %>        
+    <% end %>
+    <% if @coin.moderator == @user || @user.admin? %>
+      <p><b>Moderated by: </b><%= @coin.moderator.username  %></p>
+    <% end %> 
+
+  </div>
+
+  <%= render 'coins/events' %>
+  <div class="coin-info-container">
+    <div class="coin-info-container__coin-info">
+      <%= render 'coins/questions' %>
+      <%= render 'coins/basicinfo' %>
+    </div>
+    <div class="contribute-container-background">
+      <div class="contribute-container">
+        <a href="/donations" class="contribute-container__submit-button secondary-small">
+          Help the Community - Donate
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

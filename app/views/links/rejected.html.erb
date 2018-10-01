@@ -1,0 +1,29 @@
+<div class="links-container">	
+	<h2>Rejected Links:</h2><br><br>
+	<% @pending.each do |link| %>	
+		<% if link.rejected? %>
+			<% if link.coin.moderator == current_user || current_user.admin %>
+				<div id="link-info">
+					<ul><b>Link Name: </b><%= link.websitename %></ul>
+					<ul><b>URL: </b><%= link.url %></ul>
+					<ul><b>Submitted By: </b><%= link.user.username %></ul>
+					<ul><b>Submitted On: </b><%= link.created_at.strftime('%a %b %d %Y') %></ul>
+					<ul><b>Accepted: </b><%= link.accepted? %></ul>	
+				</div>		
+				<div class="links-container__button-group" id="link-buttons">
+					<%= link_to "View Submission", coin_link_path(link.coin_id, link.id), class: "secondary-small" %>
+					<% if  current_user.admin? || @coin.moderator == current_user %>
+						<%= link_to "Edit", edit_coin_link_path(link.coin.id, link.id), class: "secondary-small"  %>
+		    		<%= link_to (link.rejected ? "Restore" : "Reject"), reject_coin_link_path(link.coin_id, link.id), class: "secondary-small" %>
+		  		<% end %>
+				</div>	
+			<% end %>
+		<% end %>
+		<hr>
+	<% end %>
+</div>
+<div class="links-container__button-group">
+	<%= link_to "Back to Submissions", coin_links_path(@coin.id), class: "secondary-small" %>
+	<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small"  %>	
+	<%= link_to "All Coins", coins_path, class: "secondary-small"  %>
+</div>

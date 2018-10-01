@@ -1,0 +1,131 @@
+@import '_css_reset';
+@import '_default';
+@import '_variables';
+
+.login-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 150px;
+  height: 100vh;
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  h1 {
+    margin-bottom: 50px;
+
+    font-size: 30px;
+    font-weight: normal;
+  }
+
+  #user-forms {
+    flex: 1;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 100px;
+    width: 25%;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .form-group {
+      width: 100%;
+    }
+
+    input {
+      height: 45px;
+      margin-bottom: 15px;
+      padding: 5px 20px;
+
+      font-family: $default-font-family;
+      border-radius: 50px;
+      border: 1px solid rgba(125, 125, 125, 0.2);
+      box-shadow: 1px 2px 5px 0px rgba(125, 125, 125, 0.3);
+
+      font-size: 12px;
+      font-family: $default-font-family;
+      letter-spacing: 1px;
+    }
+
+    input[type='submit'] {
+      height: 35px;
+      width: 35px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px 0;
+      height: 35px;
+      width: 35px;
+      font-size: 16px;
+      color: white;
+
+      border-radius: 50%;
+      background: linear-gradient(to right, #4BA7F8, #2958F6);
+    }
+
+    .shared-links-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+
+      a {
+        color: $primary-blue;
+        font-size: 12px;
+        font-family: $default-font-family;
+        text-decoration: underline;
+      }
+
+      a:hover {
+        background: none;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.contribute-container-background {
+  position: relative;
+  bottom: 0;
+  width: 120%;
+  background: linear-gradient(to right, $left-gradient-blue, $right-gradient-blue);
+  border-radius: 50%/300px 300px 0 0;
+  overflow: hidden;
+}
+
+.contribute-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 200px;
+
+  height: 100%;
+  /* Curved top border start */
+  width: 100%;
+
+  // border-radius: 50%/300px 300px 0 0;
+  background: repeating-radial-gradient(circle at top 100px left 50%, rgba(58, 121, 246, 0.6), rgba(62, 129, 247, 0.6) 20%);
+  /* Curved top border end */
+
+  color: white;
+  font-family: $default-font-family;
+
+  &__submit-button {
+    position: relative;
+    top: -15px;
+    box-shadow: 0px 1px 5px 0px rgba(25, 25, 25, 0.6);
+  }
+}

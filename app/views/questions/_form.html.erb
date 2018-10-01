@@ -1,0 +1,22 @@
+<%= simple_form_for @question, url: coin_questions_path(@coin.id) do |f| %>
+
+	<!-- For refactoring -->
+	<% if @ques_num == 2 %>
+		<%= f.input :term %>
+		<%= f.input :description, label: 'Term Definition' %>
+	<% elsif @ques_num == 3 %>
+		<%= f.input :term, label: 'Key Player' %>
+		<%= f.input :description, label: 'Key Player Definition' %>
+	<% else %>
+		<%= f.cktext_area :content, value: @question.content %> </br>
+	<% end %>
+
+	<%= f.hidden_field :ques_num, value: @ques_num %>
+	<%= f.hidden_field :coin_id, value: @coin.id %>
+	
+	<div class="form-container__horizontal-button-group">
+		<%= f.button :submit, 'Submit', class: "primary-small" %>
+		<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small" %>
+	</div>
+
+<% end %>

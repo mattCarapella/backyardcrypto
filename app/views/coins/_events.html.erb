@@ -1,0 +1,156 @@
+<script type="text/javascript">
+
+	jQuery(document).ready(function($) {
+    var stickyNavTopMobile = $('div.mb-menu').offset().top - 68;
+    var stickyNavTopDesktop = $('div.mb-menu').offset().top - 95;
+    var topHeightMobile = $('#shiftnav-toggle-main').outerHeight();
+    var topHeightDesktop = $('div.navbar').outerHeight();
+    var stickyNav = function() {
+      var scrollTop = $(window).scrollTop();
+
+      if (($(window).width() < 991) && (scrollTop >= stickyNavTopMobile)) {
+        $('div.mb-menu').css ({
+          'position': 'relative',
+          'top': topHeightMobile+'px',
+          'margin-top': '0px',
+          'background-color': 'white',
+          'margin-left': '-35em'
+        });
+      } else if (($(window).width() < 991) && (scrollTop < stickyNavTopMobile)){
+        $('div.mb-menu').css ({
+          'position': 'relative',
+          'margin-top': '-35px',
+          'top': '0',
+          'margin-left': '-20%'
+        });
+      } else if (($(window).width() > 991) && (scrollTop >= stickyNavTopDesktop)) {
+        $('div.mb-menu').css ({
+          'position': 'relative',
+          'top': topHeightDesktop+'px',
+          'margin-top': '0px',
+          'padding-top': '15px',
+          'background-color': 'white'
+          });
+      } else if (($(window).width() > 991) && (scrollTop < stickyNavTopDesktop)) {
+        $('div.mb-menu').css ({
+          'position': 'relative',
+          'padding-top': '0px',
+          'margin-top': '-30px',
+          'top': '0'
+        });
+      }
+      };
+      stickyNav();
+      $(window).scroll(function() {
+         stickyNav();
+      });
+    });
+
+    jQuery(function () {
+    jQuery(".scroll").click(function(event) {
+                event.preventDefault();
+                jQuery('html, body').animate({
+                    scrollTop: jQuery(this.title).offset().top-180},
+                    500);
+    });
+	});
+
+	jQuery(function($){
+		'use strict';
+
+	    var $frame = $('#forcecentered');
+			var $wrap  = $frame.parent();
+
+			// Call Sly on frame
+			$frame.sly({
+				horizontal: 1,
+				itemNav: 'basic',
+				itemSelector:   null,
+				smart: 1,
+				activateMiddle: true,
+		                activateOn: 'click',
+				mouseDragging: 1,
+				touchDragging: 1,
+				releaseSwing: 1,
+				startAt: 0,
+				scrollBy: 1,
+				speed: 300,
+				elasticBounds: 1,
+				easing: 'easeOutExpo',
+				dragHandle: 1,
+				dynamicHandle: 1,
+				clickBar: 1
+			});
+	});
+
+</script>
+
+<div class="coin-container__coin-events">
+	<div class="event-title-container">
+		<h3>Event Timeline</h3>
+		<div class="event-title-container__event-buttons">
+			<%= link_to "Submit an Event/Milestone", new_coin_event_path(@coin.id,) , class: "primary-small" %>
+			<%= link_to "All #{@coin.currency_name} Events", coin_events_path(@coin.id), class: "secondary-small" %>
+		</div>
+	</div>
+	<div class="controls-mobile wrap">
+		<div class="frame menu nav-controls mb-menu" id="forcecentered" style="overflow: hidden;">
+			<ul class="clearfix careers-controls hidden-menu" style="transform: translateZ(0px) translateX(457px); min-width: 800px;">
+				<% #@coin_events = @coin.events.order(:date) %>
+				<% @coin_events.each do |event| %>
+					<% if event.accepted? %>
+						<li class="inactive lp_nav scroll">
+
+							<div class="event-item-container">
+								<h4 class="event-item-container__event-title">
+									<%= link_to event.content, event.link %>
+								</h4>
+								<div class="event-item-container__event-details-container">
+									<div class="event-item-container__line-break"></div>
+
+									<div class="event-item-container__event-details">
+										<p><%= event.city.titleize %>, <%= event.state %></p>
+										<% if event.country != "United States" %>
+											<p><%= event.country %></p>
+										<% end %>
+										<p><%= event.date.in_time_zone(@user_timezone).strftime('%B %e, %Y') %></p>
+										<!-- <p><b>Submitted by: </b><%= event.user.username %></p> -->
+									</div>
+
+									<% up = Float(event.get_upvotes.size) %>
+									<% down = Float(event.get_downvotes.size) %>
+
+									<div class="event-item-container__event-approval-rating">
+										<% total = Float(up + down) %>
+										<% if total > 0 %>
+											Approval Rating:<%= (up/total*100).round(2) %>
+										<% else %>
+											Approval Rating: n/a
+										<% end %>
+									</div>
+
+									<div class="event-item-container__event-votes">
+										<%= link_to like_coin_event_path(event.coin.id, event.id), method: :put, class: "vote-button" do %>
+											<span class="glyphicon glyphicon-chevron-up"></span>
+											<p><%= event.get_upvotes.size %></p>
+										<% end %>
+
+										<%= link_to dislike_coin_event_path(event.coin.id, event.id), method: :put, class: "vote-button" do %>
+											<span class="glyphicon glyphicon-chevron-down "></span>
+											<p><%= event.get_downvotes.size %></p>
+										<% end %>
+									</div>
+								</div>
+							</div>
+						</li>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script src="js/jquery.easing.js"></script>
+<script src="sly/horizontal.js"></script>
+<script src="http://darsa.in/sly/js/vendor/modernizr.js"></script>
+<script src="http://darsa.in/sly/js/sly.min.js" ></script>

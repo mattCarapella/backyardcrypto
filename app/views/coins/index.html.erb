@@ -1,0 +1,81 @@
+<% provide(:title, "Coins") %>
+<div id="particles-js"></div>
+<div id="coins-index">
+	<div class="coins-page-container">
+			
+		<div class='search-container'>
+			<%= link_to(new_coin_path, {:class=>"primary-small"}) do %>
+				<i class="fas fa-plus"></i>
+				Add a Coin
+			<%end%>
+
+			<% if @user.admin? %>
+				<%= link_to(pending_coins_path, {:class=>"primary-small"}) do %>
+					<i class="fas"></i>
+					Pending Coins
+				<% end %>
+			<% end %>
+			
+			<%= form_tag coins_path, method: :get do %>
+				<%= text_field_tag :currency_name, params[:search], placeholder: "Search coins..." %>
+			<% end %>
+		</div>
+
+		<% response = HTTParty.get("https://api.coinmarketcap.com/v2/ticker/") %>
+		
+		<% if response['data'] %>
+			<table class='coins-container'>
+				<tr class="header-row">
+					<th class="header-row__id">#</th>
+					<th class="header-row__name">Name</th>
+					<th class="header-row__market-cap">Market Cap</th>
+					<th class="header-row__price">Price</th>
+					<th class="header-row__value">Volume(24h)</th>
+					<th class="header-row__supply">Supply(24h)</th>
+					<th class="header-row__change">Change(24h)</th>
+				</tr>
+				
+				<% @coins.each do |coin| %>
+					<% if response['data']["#{coin.coinmarket_id}"] %>
+						<tr class='coin' data-link="<%= coin_path(coin) %>">
+							<td class="coin__id"><%= coin.id %></td>
+							<td class="coin__currency_name">
+								<div class="coin__currency_name_with_logo">
+									<span class="sprite sprite-<%= coin.currency_name.gsub(/\s+/, "").downcase %> small_coin_logo"></span>
+									<p><%= coin.currency_name %></p>
+								</div>
+							</td>
+							<td class="coin__market-cap"><%= number_to_currency(response['data']["#{coin.coinmarket_id}"]['quotes']['USD']['market_cap'], precision: 2) %></td>
+							<td class="coin__price"><%= number_to_currency(response['data']["#{coin.coinmarket_id}"]['quotes']['USD']['price'], precision: 2) %></td>
+							<td class="coin__value"><%= number_to_currency(response['data']["#{coin.coinmarket_id}"]['quotes']['USD']['volume_24h'], precision: 2) %></td>
+							<td class="coin__supply"><%= number_with_precision(response['data']["#{coin.coinmarket_id}"]['total_supply'], delimiter: ",", precision: 0) %> <%= "#{coin.currency_abbrev}" %></td>
+							<td class="coin__change"><%= response['data']["#{coin.coinmarket_id}"]['quotes']['USD']['percent_change_24h'] %>%</td>
+						</tr>
+					<% end %>
+				<% end %>
+			</table>
+			<%= will_paginate @coins, previous_label: "Prev", next_label: "Next" %>
+		<% end %>
+	</div>
+
+	<div class="contribute-container-background">
+		<div class="contribute-container">
+			<a href="/donations" class="contribute-container__submit-button secondary-small">
+				Help the Community - Donate
+			</a>
+		</div>
+	</div>
+
+</div>
+
+<%= javascript_include_tag 'coins' %>
+
+<script>
+	function openNav() {
+	  document.getElementById("mySidenav").style.width = "250px";
+	}
+
+	function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	}
+</script>

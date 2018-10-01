@@ -1,0 +1,37 @@
+// COLORS
+$black: #292929;
+$primary-blue: #0981FE; // rgba(9, 129, 254, 1)
+$left-gradient-blue: #00ACFF; // rgba(0, 172, 255, 1)
+$right-gradient-blue: #0981FE; // rgba(9, 24, 254, 1)
+$gray: #666666;
+$bg-gray: #F7F9F9;
+
+// BUTTON STYLES
+
+// FONT STYLES
+$backup-font-family: 'Roboto', sans-serif;
+
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('/assets/fonts/ProximaNova-Reg.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('/assets/fonts/ProximaNova-Bold.otf');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('/assets/fonts/ProximaNova-Sbold.otf');
+  font-weight: bolder;
+}
+
+$default-font-family: 'ProximaNova', sans-serif;
+
+// RESPONSIVE SCREEN WIDTH
+$small: 640px;
+$medium: 900px;

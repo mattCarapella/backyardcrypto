@@ -1,0 +1,77 @@
+<% provide(:title, @user.username) %>
+
+<div class="user-profile-container" id="user-show">
+  <div class="user-profile-container__user-info-section">
+    <div class="user-profile-container__user-avatar">
+      <%= image_tag @user.id_photo? ? @user.id_photo : "https://media.licdn.com/dms/image/C5603AQG00I7urvfWyg/profile-displayphoto-shrink_800_800/0?e=1539820800&v=beta&t=QpKgkjBDSiMfv47kqnq7fuPBExnYyHnHlzDWE8-oI-k" %>
+      <div class="user-profile-container__social-links">
+        <a href="https://www.facebook.com/Backyardcrypto" class="social-icon-container">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/BackyardCrypto" class="social-icon-container">
+          <i class="fab fa-twitter-square"></i>
+        </a>
+      </div>
+      <%= link_to "Edit Profile", edit_user_registration_path, class: "primary-small" %>
+    </div>
+
+    <div class="user-profile-container__user-profile-section">
+      <h4>Info</h4>
+      <% @user = current_user %>
+      <p><b>Name: </b> <%= (@user.fname) %>  <%= (@user.lname)  %></p>
+      <p><b>Username: </b><%= @user.username %></p>
+      <p><b>Email: </b><%= @user.email %></p>
+      <p><b>Public Litecoin Wallet Address: </b><%= @user.wallet %></p>
+      <p><b>Current Balance:</b> <%= number_to_currency(@user.currentbalance, :unit => "$") %></p>
+      <p><b>Reward Details: </b> <%= number_to_currency(@user.payout_to_date, :unit => "$") %></p>
+      <p><b>Member for: </b> <%= @user.created_at.time_ago_in_days %></p>
+    </div>
+    <div class="user-profile-container__user-links-section">
+      <h4>Links</h4>
+    </div>
+    <div class="user-profile-container__user-bio-section">
+      <h4>Bio</h4>
+    </div>
+  </div>
+
+  <div class="user-profile-container__user-submission-info">
+    <% if @user.moderator? %>
+      <%= render 'users/moderator' %>
+    <% end %>
+
+    <h2>Your Submissions</h2>
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills nav-justified" role="tablist" id="submission-tabs">
+      <li role="presentation" class="active">
+        <a href="#active" aria-controls="active" role="tab" data-toggle="pill">Active</a>
+      </li>
+      <li role="presentation">
+        <a href="#inactive" aria-controls="inactive" role="tab" data-toggle="pill">Inactive</a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="active"><%= render 'users/active' %></div>
+        <div role="tabpanel" class="tab-pane fade" id="inactive"><%= render 'users/inactive' %></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  $(function () {
+    $("#accordion1").accordion({
+      collapsible: true,
+      active: false,
+      heightStyle: "content",
+    });
+    $("#accordion3").accordion({
+      collapsible: true,
+      active: false,
+      heightStyle: "content",
+    });
+  });
+</script>

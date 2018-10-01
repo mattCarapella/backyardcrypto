@@ -1,0 +1,39 @@
+<% provide(:title, "About") %>
+<div id="particles-js"></div>
+<div class="about-container">
+  <div class="about-container__video-container">
+    <h2>Welcome to the Encylopedia of Blockchain</h2>
+    <p>Our Mission is to deliver technical blockchain knowledge, transforming it to an everyday language, while rewarding the community that helps build our vision.</p>
+  </div>
+  <div class="about-container__about-us-content-background">
+    <div class="about-container__about-us-content">
+      <h2>About Us</h2>
+      <p>Backyard Crypto’s goal is to establish a site that fills a critical gap in the cryptoworld. We noticed the community was making high risk investments, making uneducated decisions. Launching into trending tokens without care for its mission/utility. Our concern for the safety of the community, spurred our drive to build a trustworthy space to provide the fundamentals for everyone to make educated decisions. </p>
+      <br>
+      <p>Our mission and passion to help the community and care for the community, engineered a site that provides valuable information and gives back to the community. Thus, a new kind of Pedia was formed, one where monetary development would be shared with the individuals that make the site great.  We hope you enjoy Backyard Crypto! </p>
+      <div class="about-container__button-group">
+        <div class="button-container-left">
+          <%= link_to "Editor Handbook",  asset_path('pdf/editor-handbook.pdf'), target: "_blank", class: "secondary-small" %>
+        </div>
+        <div class="button-container-center">
+          <%= link_to "Moderator Handbook",  asset_path('pdf/moderator-handbook.pdf'), target: "_blank", class: "secondary-small" %>
+        </div>
+        <div class="button-container-right">
+          <%= link_to "Super User Handbook",  asset_path('pdf/super-user-handbook.pdf'), target: "_blank", class: "secondary-small" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render "team" %>
+  <div class="about-container__contributor">
+    <h3>Did you know you can get awarded as a contributor?</h3>
+    <a href="/payouts" class="primary-small">Learn More</a>
+  </div>
+  <div class="contribute-container-background">
+		<div class="contribute-container">
+			<a href="/donations" class="contribute-container__submit-button secondary-small">
+				Help the Community - Donate
+			</a>
+		</div>
+	</div>
+</div>

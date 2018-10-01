@@ -1,0 +1,20 @@
+<% provide(:title, "Edit Event") %>
+<div class="form-container">
+	<h2> Edit Event </h2>
+	<%= simple_form_for @event, url: coin_event_path(@coin.id) do |f| %>
+	<div class="form-container__section">
+		<%= f.input :content, label: false, placeholder: "Event Description", class: 'form-control' %>
+		<%= f.input :link, label: false, placeholder: "Link to Event", class: 'form-control' %>
+		<%= f.input :date, order: [:month, :day, :year], class: 'form-control' %>
+		<%= f.input :city, label: false, placeholder: "City", class: 'form-control' %>
+		<%= f.input :state, :as => :select, label: false, placeholder: "State", :collection => us_states %>
+		<%= f.input :country, :as => :select, :collection => countries %>
+		<%= f.input :description, label: false, placeholder: "Event Description", class: 'form-control' %>
+		
+		<div class="form-container__horizontal-button-group">
+			<%= f.button :submit, 'Submit', class: "primary-small" %>
+			<%= link_to "Back", coin_path(@coin.id), class: "secondary-small" %>
+		</div>
+	</div>
+	<% end %>
+</div>

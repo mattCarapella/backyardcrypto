@@ -1,0 +1,41 @@
+<div class="user-profile-container__submitted-links">
+
+  <u><b>Links:</b></u><br><br>
+  <b>Active:</b><br>
+  <% @user.links.each do |link| %>
+  <% if link.accepted? %>
+  <ul><b>Coin: </b><%= link_to link.coin.currency_name, coin_path(link.coin.id) %></ul>
+  <ul><b>Website: </b><%= link_to link.websitename, coin_link_path(link.coin_id, link.id) %></ul>
+  <ul><b>URL: </b><%= link_to link.url %></ul>
+  <ul><b>Submitted on: </b><%= link.created_at.strftime('%b %d, %Y') %></ul>
+  <ul><b>Approved for: </b><%= link.updated_at.time_ago_in_days %></ul>
+  <ul><b>Reward Details: </b> </ul>
+  <br>
+  <% end %>
+  <% end %>
+
+  <b>Pending Approval:</b><br>
+  <% @user.links.each do |link| %>
+  <% if not link.accepted? %>
+  <ul><b>Coin: </b><%= link_to link.coin.currency_name, coin_path(link.coin.id) %></ul>
+  <ul><b>Website: </b><%= link_to link.websitename, coin_link_path(link.coin_id, link.id) %></ul>
+  <ul><b>URL: </b><%= link_to link.url %></ul>
+  <ul><b>Submitted on: </b><%= link.created_at.strftime('%b %d, %Y') %></ul>
+  <ul><b>Approved for: </b><%= link.updated_at.time_ago_in_days %></ul>
+  <ul><b>Reward Details: </b> </ul>
+  <br>
+  <% end %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(
+    function () {
+      $("#accordion").accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: "content",
+      });
+    }
+  );
+</script>

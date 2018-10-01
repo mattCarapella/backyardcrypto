@@ -1,0 +1,20 @@
+
+<div class="container">
+	<center style="margin-bottom:50px;">
+		<h2> Editor Uploaded Images</h2>
+	</center>
+
+	<div class="row">
+
+		<% @editor_images.each do |image| %>
+		  <div class="col-md-4">
+		  	<img data-ckeditor-num= <%= @CKEditorFuncNum %> src= <%= @host + image.file.url  %> alt="..." class="img-thumbnail editor-images">
+		  </div>
+
+		 <% end %>
+
+	</div>
+
+</div>
+
+

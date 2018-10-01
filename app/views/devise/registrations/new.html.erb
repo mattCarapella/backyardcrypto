@@ -1,0 +1,30 @@
+<% provide(:title, "Sign Up") %>
+<div id="particles-js"></div>
+<div class="login-container">
+	<h1>Signup</h1>
+	<div id="user-forms">
+		<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+		  <%= f.error_notification %>
+
+		    <%= f.input :username, autofocus: true, placeholder: "Username", label: false %>
+		    <%= f.input :email, required: true, autofocus: true, placeholder: "Email", label: false %>
+		    <%= f.input :password, required: true, placeholder: "Password", label: false %>
+		    <!-- <%= f.input :password_confirmation, required: true %>
+		    <%= f.input :fname, label: "First Name", autofocus: true %>
+		    <%= f.input :lname, label: "Last Name", autofocus: true %>
+		    <%= f.input :wallet, label: "Public Litecoin Wallet (For Payouts)", autofocus: true %> -->
+				<button type="submit" class="form-actions">
+						<i class="fas fa-angle-right"></i>
+				</button>
+		    <%= render "devise/shared/links" %>
+		<% end %>
+
+	</div>
+	<div class="contribute-container-background">
+		<div class="contribute-container">
+			<a href="/donations" class="contribute-container__submit-button secondary-small">
+				Help the Community - Donate
+			</a>
+		</div>
+	</div>
+</div>

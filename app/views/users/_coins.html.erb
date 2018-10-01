@@ -1,0 +1,49 @@
+<div class="user-profile-container__submitted-coins">
+  <% if @user.coins %>
+    <h4>Accepted Coins</h4>
+
+    <% @user.coins.each do |coin| %>
+      <% if coin.accepted? %>
+        <div class="coin-info">
+          <h5><%= link_to coin.currency_name, coin_path(coin.id) %></h5>
+          <div class="coin-info__left">
+            <p><b>Submitted On:</b> <%= coin.created_at.strftime('%b %d, %Y') %></p>
+            <p><b>Accepted On:</b> <%= coin.updated_at.strftime('%b %d, %Y') %></p>
+            <p><b>Reward Details:</b> </p>
+            <p><b>LTC Awarded:</b> </p>
+          </div>
+          <div class="coin-info__right">
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <h4>Pending Approval</h4>
+    <% @user.coins.each do |coin| %>
+      <% if not coin.accepted? %>
+        <div class="coin-info">
+          <h5><%= link_to coin.currency_name, coin_path(coin.id) %></h5>
+          <div class="coin-info__left">
+            <p><b>Submitted On:</b> <%= coin.created_at.strftime('%b %d, %Y') %></p>
+            <p><b>Accepted On:</b> <%= coin.updated_at.strftime('%b %d, %Y') %></p>
+          </div>
+          <div class="coin-info__right">
+            <p><b>Reward Details:</b> </p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(
+    function () {
+      $("#accordion").accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: "content",
+      });
+    });
+
+</script>

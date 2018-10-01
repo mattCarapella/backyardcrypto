@@ -1,0 +1,16 @@
+<div class="coin-container__coin-header-container" id="coin-hdr">
+	<img class="" src='<%= @img_url_ %>' />
+	<h2><%= @coin.currency_name %></h2>
+	<% coin_change_class = "coin-change" %>
+	<% @percent_change_1h_ >= 0 ? coin_change_class += ' positive' : coin_change_class += ' negative' %>
+	<p class='<%= coin_change_class %>'><%= @percent_change_1h_ %>%</p>
+
+	<div class="coin-update-buttons">
+		<% if can? :update, @coin %>
+			<%= link_to edit_coin_path(@coin), "data-turblinks" => "false" do %>
+				<i class="fas fa-pencil-alt"></i>
+			<% end %>
+		<% end %>
+	</div>
+
+</div>

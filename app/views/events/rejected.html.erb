@@ -1,0 +1,27 @@
+<% provide(:title, "Rejected Event Submissions") %>
+<% @rejected.each do |event| %>
+		<ul><b>Event: </b><%= event.content %></ul>
+		<ul><b>Category: </b><%= event.coin.currency_name %></ul>
+		<ul><b>Link: </b><%= event.link %></ul>
+		<ul><b>Date: </b><%= event.date.strftime('%a %b %d %Y') if defined?(event.date) %></ul>
+		<ul><b>Location: </b><%= event.city %>, <%= event.state %>, <%= event.country %></ul>
+		<ul><b>Description: </b><%= event.description %></ul>
+		<ul><b>Submitted by: </b><%= event.user.username %></ul>
+		<ul><b>Accepted: </b><%= event.accepted? %></ul>
+<!-- 		<ul><b>Rejected: </b><%= event.rejected? %></ul>
+		<ul><b>Pending: </b><%= event.pending? %></ul> -->
+		<br>
+		<div class="links-container__button-group" id="link-buttons">
+			<%= link_to "View Event", coin_event_path(event.coin_id, event.id), class: "secondary-small" %>
+			<%= link_to (event.accepted ? "Deactivate" : "Activate"), flop_coin_event_path(event.coin_id, event.id), class: "secondary-small" %>
+			<%= link_to (event.rejected ? "Restore" : "Reject"), reject_coin_event_path(event.coin_id, event.id), class: "secondary-small" %>	
+			<hr>
+		</div>
+		<br>
+<% end %>
+
+<div class="btn-group">
+	<%= link_to "Back to Events", coin_events_path(@coin.id), class: "secondary-small" %>
+	<%= link_to "Back to #{@coin.currency_name}", coin_path(@coin.id), class: "secondary-small"  %>
+	<%= link_to "Back to All Coins", coins_path, class: "secondary-small"  %>
+</div>

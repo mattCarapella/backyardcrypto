@@ -1,0 +1,154 @@
+<div class="user-profile-container__submitted-questions">
+  <div id='accordion1'>
+    <% if @user.events %>
+      <% @user.events.each do |event| %>
+        <% if event.accepted? %>
+          <div class="term-header-wrapper">
+            <div class="term-header">
+              <div class="term-info">
+                <p><b>Coin: </b><%= link_to event.coin.currency_name, coin_event_path(event.coin_id, event.id) %></p>
+                <p><b>Event: </b><%= link_to event.content, coin_event_path(event.coin_id, event.id) %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="description">
+            <div class="info">
+              <p>
+                <b>Submitted: </b>
+                <%= event.created_at.strftime('%b %d, %Y') %>
+              </p>
+              <p>
+                <b>Active for: </b>
+                <%= event.updated_at.time_ago_in_days %>
+              </p>
+            </div>
+
+            <div class="button-group">
+              <%= link_to "View", coin_event_path(event.coin_id, event.id), class: "primary-small","data-turbolinks"=>"false" %>
+
+                <% if current_user.admin %>
+                  <%= link_to "Edit", edit_coin_event_path(event.coin_id, event.id), class: "secondary-small","data-turbolinks"=>"false" %>
+                <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @user.questions %>
+      <% @user.questions.each do |question| %>
+        <% if question.accepted? %>
+          <div class="term-header-wrapper">
+            <div class="term-header">
+              <div class="term-info">
+                <b>
+                  <p>Coin:</b>
+                <%= link_to question.coin.currency_name, coin_path(question.coin.id) %>
+                  </p>
+                  <p>
+                    <b>Question Number: </b>
+                    <%= question.ques_num %>
+                  </p>
+              </div>
+            </div>
+          </div>
+    
+          <div class="description">
+            <div class="info">
+              <p>
+                <b>Submitted: </b>
+                <%= question.created_at.strftime('%b %d, %Y') %>
+              </p>
+
+              <p>
+                <b>Active for: </b>
+                <%= question.updated_at.time_ago_in_days %>
+              </p>
+            </div>
+    
+            <div class="button-group">
+              <%= link_to "View", coin_question_path(question.coin_id, question.id), class: "primary-small","data-turbolinks"=>"false" %>
+    
+                <% if current_user.admin %>
+                  <%= link_to "Edit", edit_coin_question_path(question.coin_id, question.id), class: "secondary-small","data-turbolinks"=>"false" %>
+                    <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @user.links %>
+      <% @user.links.each do |link| %>
+        <% if link.accepted? %>
+          <div class="term-header-wrapper">
+            <div class="term-header">
+              <div class="term-info">
+                <p><b>Coin: </b><%= link_to link.coin.currency_name, coin_path(link.coin_id) %></p>
+                  <p><b>Link: </b><%= link.url %></p>
+              </div>
+            </div>
+          </div>
+    
+          <div class="description">
+            <div class="info">
+              <p>
+                <b>Submitted: </b>
+                <%= link.created_at.strftime('%b %d, %Y') %>
+              </p>
+              <p>
+                <b>Active for: </b>
+                <%= link.updated_at.time_ago_in_days %>
+              </p>
+            </div>
+    
+            <div class="button-group">
+              <%= link_to "View", coin_link_path(link.coin_id, link.id), class: "primary-small","data-turbolinks"=>"false" %>
+    
+              <% if current_user.admin %>
+                <%= link_to "Edit", edit_coin_link_path(link.coin_id, link.id), class: "secondary-small","data-turbolinks"=>"false" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @user.coins %>
+      <% @user.coins.each do |coin| %>
+        <% if coin.accepted? %>
+          <div class="term-header-wrapper">
+            <div class="term-header">
+              <div class="term-info">
+                <p><b>Coin: </b><%= link_to coin.currency_name, coin_path(coin.id) %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="description">
+            <div class="info">
+              <p>
+                <b>Submitted: </b>
+                <%= coin.created_at.strftime('%b %d, %Y') %>
+              </p>
+
+              <p>
+                <b>Active for: </b>
+                <%= coin.updated_at.time_ago_in_days %>
+              </p>
+            </div>
+
+            <div class="button-group">
+              <%= link_to "View", coin_path(coin.id), class: "primary-small","data-turbolinks"=>"false" %>
+
+                <% if current_user.admin %>
+                  <%= link_to "Edit", edit_coin_path(coin.id), class: "secondary-small","data-turbolinks"=>"false" %>
+                <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

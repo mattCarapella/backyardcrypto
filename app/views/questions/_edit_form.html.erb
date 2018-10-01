@@ -1,0 +1,6 @@
+
+<%= simple_form_for @question, url: coin_question_path(@coin.id) do |f| %>
+	<%= f.collection_select :coin_id, Coin.all, :id, :currency_name %>
+	<%= f.input :content %>
+	<%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>

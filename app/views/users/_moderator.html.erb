@@ -1,0 +1,75 @@
+<div class="user-profile-container__moderator-details">
+  <b>MODERATOR TOOLBAR:</b><hr>
+  <u><b>Moderated Coins: </b></u>
+  <br><br>
+
+  <% @user.moderated_coins.each do |coin| %>
+    <b><u><%= link_to coin.currency_name, coin_path(coin.id) %></u></b><br><br>
+    <ul><u><b>SECTION 1: Coin</b></u></ul>
+    <ul><b>Created by: </b><%= coin.user.username %></ul>
+    <ul><b>Submitted on: </b><%= coin.created_at.strftime('%b %d, %Y') %></ul>
+    <ul><b>Accepted on: </b><%= coin.updated_at.strftime('%b %d, %Y') %></ul>
+    <ul><b>Active for: </b><%= coin.updated_at.time_ago_in_days %></ul>
+    <ul><b>Reward Details: </b> <%= number_to_currency(@user.payout_to_date, :unit => "$") %></ul>
+    <br>
+
+    <ul><u><b>SECTION 2: Questions</b></u></ul>
+    <ul><u><b><%= link_to "Brief Overview: ", new_coin_question_path(coin.id, :ques_num => 1) %></b></u></ul>
+    <% if coin.question1 %>
+      <ul><%= coin.question1 %></ul>
+      <ul><u><b>Overview Contributers:</b></u></ul>
+      <% coin.questions.each do |q| %>
+        <% if q.ques_num == 1 and q.accepted? %>
+          <ul><%= q.user.username %></ul>
+          <ul><b>Submitted on: </b><%= q.created_at.strftime('%b %d, %Y') %></ul>
+          <ul><b>Accepted on: </b><%= q.updated_at.strftime('%b %d, %Y') %></ul>
+          <ul><b>Active for: </b><%= q.updated_at.time_ago_in_days %></ul>
+          <ul><b>Reward Details: </b> <%= number_to_currency(@user.payout_to_date, :unit => "$") %></ul>
+          <br>
+        <% end %>
+      <% end %>
+    <% end %>
+    <br>
+
+    <ul><u><b><%= link_to "Terminology: ", coin_questions_path(coin.id, :ques_num => 2) %></b></u></ul><br>
+    <ul><u><b><%= link_to "Key Players: ", coin_questions_path(coin.id, :ques_num => 3) %></b></u></ul><br>
+    <ul><u><b><%= link_to "In-Depth Analysis: ", coin_questions_path(coin.id, :ques_num => 4) %></b></u></ul><br>
+    <br><br>
+
+    <ul><u><b><%= link_to "SECTION 3: Road Map", coin_events_path(coin.id) %></b></u></ul>
+    <% if coin.events %>
+      <% @prior = coin.events.prior_events %>
+      <% @after = coin.events.later_events %>
+      <ul>------------------------------------------------------------------------</ul>
+      <ul><b>Past Events:</b></ul>
+      <ul>------------------------------------------------------------------------</ul>
+      <% @prior.each do |e| %>
+        <% if e.accepted? %>
+        <ul><b>Event: </b><%= link_to e.content, edit_coin_event_path(e.coin_id, e.id) %></ul>
+        <ul><b>Date: </b><%= e.date.strftime('%b %d, %Y') %></ul>
+        <ul><b>Submitted by: </b><%= e.user.username %></ul>
+        <ul><b>Submitted on: </b><%= e.created_at.strftime('%b %d, %Y') %></ul>
+        <ul><b>Accepted on: </b><%= e.updated_at.strftime('%b %d, %Y') %></ul>
+        <ul><b>Active For: </b><%= e.updated_at.time_ago_in_days %></ul>
+        <ul><b>Reward Details: </b> <%= number_to_currency(@user.payout_to_date, :unit => "$") %></ul>
+        <br>
+        <% end %>
+      <% end %>
+      <ul>------------------------------------------------------------------------</ul>
+      <ul><b>Future Events:</b></ul>
+      <ul>------------------------------------------------------------------------</ul>
+      <% @after.each do |e| %>
+        <% if e.accepted? %>
+          <ul><b>Event: </b><%= link_to e.content, edit_coin_event_path(e.coin_id, e.id) %></ul>
+          <ul><b>Date: </b><%= e.date.strftime('%b %d, %Y') %></ul>
+          <ul><b>Submitted by: </b><%= e.user.username %></ul>
+          <ul><b>Submitted on: </b><%= e.created_at.strftime('%b %d, %Y') %></ul>
+          <ul><b>Accepted on: </b><%= e.updated_at.strftime('%b %d, %Y') %></ul>
+          <ul><b>Active For: </b><%= e.updated_at.time_ago_in_days %></ul>
+          <ul><b>Reward Details: </b> <%= number_to_currency(@user.payout_to_date, :unit => "$") %></ul>
+          <br>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

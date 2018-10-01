@@ -1,0 +1,23 @@
+<% names = [{name: "Aaron Kosowski", slug: 'aaron', title: "Co-Founder"}, {name: "Alex Buscaglia", slug: 'alex', title: "Co-Founder"}, {name: "Matt Carapella", slug: 'matt', title: "Lead Developer"}, {name: "Evan Kosowski", slug: 'evan', title: "Lead Designer"}] %>
+
+<div class="team-container">
+  <h2>The Backyard Team</h2>
+  <div class="team-container__profiles-container">
+    <% names.each_slice(2) do |slice| %>
+      <div class="team-container__row">
+        <% slice.each_with_index do |person| %>
+          <div class="team-container__profile">
+            <div class='team-container__image <%= person[:slug] %>'>
+              <%= image_tag "#{person[:slug]}.png" %>
+            </div>
+
+            <div class="team-container__title">
+              <h3><%= person[:name] %></h3>
+              <h5><%= person[:title] %></h5>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

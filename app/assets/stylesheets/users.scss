@@ -1,0 +1,225 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import '_css_reset';
+@import '_default';
+@import '_variables';
+
+.user-profile-container {
+  display: flex;
+  padding: 0 50px;
+  width: 100%;
+  box-sizing: border-box;
+
+  &__user-info-section {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-right: 50px;
+    height: 100%;
+
+    box-shadow: 0px 0px 5px 0px rgba(125, 125, 125, 0.4);
+
+    >div {
+      padding: 40px 30px;
+      border-bottom: 1px solid rgba(125, 125, 125, 0.2);
+
+      h4, p {
+        margin-bottom: 20px;
+      }
+    }
+
+    div:last-child {
+      border: none;
+    }
+  }
+
+  &__user-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 50px 40px;
+
+    >img {
+      width: 50%;
+      border-radius: 50%;
+    }
+  }
+
+  &__social-links {
+    padding: 20px;
+
+    .social-icon-container:first-child {
+      margin-right: 10px;
+    }
+
+    i {
+      color: $primary-blue;
+      font-size: 25px;
+    }
+  }
+
+
+
+  &__user-submission-info {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+    .nav {
+      // !important used to override bootstrap styles for tabs
+      a, a.active {
+        padding: 5px 10px !important;
+  
+        background-color: transparent !important;
+        font-size: 16px;
+      }
+  
+      a {
+        color: $gray !important;      
+      }
+  
+      li.active > a {
+        color: $black !important;
+        border: 1px solid $primary-blue;
+        border-radius: 23px;
+      }
+    }
+
+    .nav-justified {
+      margin-bottom: 50px;
+      width: 75% !important;
+    }
+
+    .tab-content {
+      width: 100% !important;
+    }
+  }
+
+  &__contributor-details {
+    width: 100%;
+    
+    > div {
+      height: 300px;
+      width: 100%;
+      margin-bottom: 50px;
+      padding: 30px;
+
+      overflow: scroll;
+      box-shadow: 0px 0px 5px 0px rgba(125, 125, 125, 0.4);
+    }
+  }
+
+  &__submitted-coins {
+    h4 {
+      margin-bottom: 10px;
+    }
+
+    .coin-info {
+      display: flex;
+      flex-direction: column;
+      padding: 5px 10px 10px;
+      margin-bottom: 10px;
+
+      box-shadow: 0px 0px 5px 0px rgba(125, 125, 125, 0.4);
+
+      h5 {
+        color: $primary-blue;
+      }
+
+      > div {
+        display: flex;
+        flex-direction: column;
+
+        p {
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  &__submitted-questions {
+    #accordion {
+      margin-bottom: 30px;
+    }
+
+    .term-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        display: none;
+      }
+      .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 25px;
+        width: 25px;
+        border: 1px solid $primary-blue;
+        border-radius: 50%;
+        i {
+          margin-left: 3px;
+          color: $primary-blue;
+        }
+      }
+      .rotate {
+        transform: rotate(90deg);
+      }
+      .term-info {
+        display: flex;
+        padding: 10px 0;
+
+        p {
+          margin-right: 20px;
+        }
+
+        a {
+          color: $black;
+        }
+      }
+    }
+
+    .description {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      background-color: $bg-gray;
+      box-shadow: 0px 0px 5px 0px rgba(125, 125, 125, 0.4);
+
+      p {
+        margin-bottom: 20px;
+      }
+
+      .button-group {
+        display: flex;
+
+        .primary-small {
+          margin-right: 10px;
+          padding: 5px 30px;
+          color: white;
+
+          &:hover {
+            color: $primary-blue;
+          }
+        }
+      }
+    }
+
+    .ui-state-default,
+    .ui-state-active {
+      margin-top: 15px !important;
+      padding: 10px 30px !important;
+      background-color: white;
+      border: transparent;
+      box-shadow: 0px 0px 5px 0px rgba(125, 125, 125, 0.4);
+    }
+  }
+}

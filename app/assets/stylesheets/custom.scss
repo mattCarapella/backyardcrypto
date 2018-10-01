@@ -1,0 +1,402 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "_variables";
+
+body{
+  min-height: 100%;
+  font-family: 'Abel', sans-serif;
+  font-size: 15px;
+  padding-top: 25px;
+  padding-bottom: 50px;
+  margin-left: 30px;
+  margin-right: 50px;
+  position: relative;
+
+  background-color: #efefef;
+}
+
+ul{
+  font-family: 'Abel', sans-serif;
+  list-style: none;
+}
+
+.editor-images{
+  cursor: pointer;
+}
+.question-container{
+  display: block;
+  h6{
+    display: inline-block;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// HOME
+////////////////////////////////////////////////////////////////////////////////////////////
+
+#login{
+	padding-left: 70px;
+	font-weight: bold;
+	font-size: 2.3em;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// COINS
+////////////////////////////////////////////////////////////////////////////////////////////
+
+// COIN INDEX PAGE
+
+.coins{
+  padding-left: 30px;
+}
+
+#search-field{
+  padding-left: 65px;
+}
+
+// COIN SHOW PAGE
+
+#column1{
+
+	float: left;
+	padding-right: 40px;
+
+
+}
+
+#column2{
+	float: left;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// QUESTIONS
+////////////////////////////////////////////////////////////////////////////////////////////
+
+#question-show{
+	margin-left: 40px;
+	margin-right: 40px;
+	padding-bottom: 10px;
+	font-size: 1.2em;
+}
+
+#question-index{
+	margin-left: 40px;
+	margin-right: 40px;
+	padding-bottom: 10px;
+}
+
+
+.question-form{
+	float: center;
+}
+
+.btn-group{
+   padding-left: 40px;
+   letter-spacing: 5px;
+}
+
+#header-right:focus {
+  color: $gray,
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// EVENTS
+////////////////////////////////////////////////////////////////////////////////////////////
+
+.event-form{
+	float: center;
+	padding-left: 40px;
+	padding-right: 40px;
+
+}
+
+.events{
+	padding-left: 50px;
+
+}
+
+#event-window{
+	position:relative;
+}
+
+#event-link{
+	position: absolute;
+  bottom: 0;
+  padding-left: 80px;
+  padding-right: 80px;
+  color: #81F7BE;
+}
+
+#approval-rating{
+  font-family: 'Abel', sans-serif;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+#event-name{
+  font-family: 'Abel', sans-serif;
+  font-weight: bolder;
+  padding-top: 15px;
+  padding-bottom: 9px;
+  font-size: 20px;
+  color: #E6E6E6;
+  line-height: 1.2;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// USER PAGES
+////////////////////////////////////////////////////////////////////////////////////////////
+
+#user-col-1{
+	margin-left: -50px;
+}
+
+#user-forms{
+	padding-left: 100px;;
+	margin-right: 100px;;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// TYPOGRAPHY
+////////////////////////////////////////////////////////////////////////////////////////////
+
+h4{
+  line-height: 1;
+  padding-left: 70px
+}
+
+h1{
+  font-family: $default-font-family;
+}
+
+h2{
+	font-weight: bold;
+}
+
+h3{
+	padding-left: 25px;
+}
+
+h5{
+	font-size: 2.0em;
+	font-weight: bold;
+}
+
+h6{
+	font-size: 1.7em;
+	padding-left: 40px;
+	font-weight: bold;
+}
+
+h7{
+  font-size: 1.6em;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 5px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+.content-question{
+
+  p hr, hr {
+
+      display: block;
+
+      border-width: 1px;
+   }
+
+  p{
+
+    a{
+      border: none;
+      cursor: pointer;
+    }
+    a:hover{
+      color: #000;
+      background-color: white;
+    }
+
+
+  }
+}
+.msg-res  {
+  p {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 12px;
+
+    a{
+      color: #337ab7;
+    }
+  }
+
+}
+
+p{
+  font-family: 'Abel', sans-serif;
+}
+
+h8{
+  font-family: 'Abel', sans-serif;
+  font-size: 1.3em;
+  font-weight: bolder;
+}
+
+p.round1 {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// FORMS
+////////////////////////////////////////////////////////////////////////////////////////////
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.wrap {
+    margin: 0;
+}
+
+
+ul.hidden-menu li {
+  line-height: 44px;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// COIN INDEX SIDEBAR
+////////////////////////////////////////////////////////////////////////////////////////////
+
+#pagination_table{
+	padding-left: 80px;
+	font-size: 20px;
+	font-weight: bolder;
+	letter-spacing: 5px;
+}
+
+.sidenav {
+
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// MESSAGE BOARD
+////////////////////////////////////////////////////////////////////////////////////////////
+
+#controls{
+	font-size: 14px;
+}
+
+.col-button{
+
+  font-size: 16px;
+  display:inline-block;
+  min-width: 50px;
+  width: 270px;
+  padding:5px 10px;
+  letter-spacing: 5px;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// TABS
+////////////////////////////////////////////////////////////////////////////////////////////
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    padding-left: 75px;
+}

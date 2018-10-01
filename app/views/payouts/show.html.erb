@@ -1,0 +1,21 @@
+<% provide(:title, "Pay Out") %>
+
+<div class="row">
+  <div class="col-md-6">
+    <% @user = current_user %>
+
+    <% if @user.wallet %>
+      <p><h4>Please Confirm Your Information Before Cashing Out.</bh4</p><hr>
+      <p><b>User:</b> <%= @user.username %></p>
+      <p><b>Name:</b> <%= (@user.fname) %>  <%= (@user.lname)  %></p>
+      <p><b>Email:</b> <%= @user.email %></p>
+      <p><b>Public Litecoin Wallet Address: </b><%= @user.wallet %></p>
+      <p><b>Current Balance:</b> <%= number_to_currency(@user.currentbalance, :unit => "$") %></p>
+      <p><b>Payout to Date: </b> <%= number_to_currency(@user.payout_to_date, :unit => "$") %></p>
+    <% else %>
+      <h4>You don't have a wallet on file yet. Please update your account information.</h4>
+      <%= link_to "Update Profile", edit_user_registration_path %> 
+    <% end %>
+  </div
+</div>
+

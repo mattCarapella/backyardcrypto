@@ -1,0 +1,61 @@
+<header class="navbar navbar-inverse">
+	<div class="left-nav">
+			<a href='/' class='logo-container'>
+        <%=image_tag("backyard-logo.png")%>
+      </a>
+	</div>
+	<div class="right-nav">
+		<nav>
+    	<ul class="nav navbar-nav navbar-right" id="main-nav">
+				<% if user_signed_in? %>
+					<li><%= link_to "Home", "javascript:;", id: "header-right", class: "nav-links back-home" %></li>
+					<li><%= link_to "Genres", genres_path, id: "header-right", class: "nav-links" %></li>
+					<li><%= link_to "Coins", coins_path, id: "header-right", class: "nav-links" %></li>
+
+					<% terms = Question.where("ques_num=? AND accepted=?",2,true) %>
+					<% players = Question.where("ques_num=? AND accepted=?",3,true) %>
+
+					<!-- <% if terms.first.present? %> -->
+				    <li> <%= link_to "Terminology", display_questions_path(ques_num: 2), id: "header-right", class: "nav-links" %></li>
+					<!-- <% end %> -->
+
+					<!-- <% if players.first.present? %> -->
+				    <li> <%= link_to "Key Players", display_questions_path(ques_num: 3), id: "header-right", class: "nav-links" %></li>
+					<!-- <% end %> -->
+
+					<li><%= link_to "About Us", about_path, id: "header-right", class: "nav-links" %></li>
+
+			    <li><%= link_to current_user.username, current_user, id: "header-right", class: "nav-links", "data-turbolinks"=>"false" %></li>
+			    <li><%= link_to "Logout", destroy_user_session_path, method: :delete, id: "header-right", class: "nav-links"  %> </li>
+			    
+				<% else %>
+          <li><%= link_to "Genres", genres_path, class: current_page?(genres_path) ? "nav-links active" : "nav-links" %></li>
+          <li><%= link_to "Coins", coins_path, class: current_page?(coins_path) ? "nav-links active" : "nav-links" %></li>
+					<li><%= link_to "About Us", about_path, id: "header-right", class: 'nav-links' %></li>
+					<li><%= link_to "Signup/Login", new_user_session_path, id: "header-right", class: "nav-links focus" %></li>
+				<% end %>
+			</ul>
+		</nav>
+		<span id="navbar-toggle">
+			<i class="fas fa-bars"></i>
+		</span>
+	</div>
+</header>
+
+<script type="text/javascript">
+	let mainNav=document.getElementById('main-nav');
+	let navbarToggle=document.getElementById('navbar-toggle');
+
+	navbarToggle.addEventListener('click',function(){
+
+		if(this.classList.contains('active')){
+				mainNav.style.display="none";
+				this.classList.remove('active');
+		}
+		else{
+				mainNav.style.display="flex";
+				this.classList.add('active');
+
+		}
+	});
+</script>

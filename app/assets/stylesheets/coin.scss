@@ -1,0 +1,349 @@
+@import '_css_reset';
+@import '_default';
+@import '_variables';
+
+.coin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  overflow: hidden;
+
+  &__admin-toolbar {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    margin: 20px 0;
+    width: 100%;
+
+    text-align: center;
+    background-color: $bg-gray;
+    box-shadow: 0px 0px 5px 0px rgba(125, 125, 125, 0.4);
+
+    .admin-form-container {
+      padding: 20px;
+      width: 50%;
+    }
+
+    .admin-form-container form {
+      display: flex;
+
+      input[type='text'] {
+        flex: 2;
+        margin-right: 20px;
+      }
+    }
+  }
+
+  &__coin-header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    > img {
+      margin-right: 10px;
+      height: 40px;
+    }
+
+    .coin-change {
+      margin-left: 10px;
+    }
+
+    .positive {
+      color: green;
+    }
+
+    .negative {
+      color: red;
+    }
+
+    .coin-update-buttons {
+      display: flex;
+
+      a {
+        margin-left: 10px;
+        width: 30px;
+
+        border: 1px solid $primary-blue;
+        border-radius: 20px;
+
+        color: $primary-blue;
+        line-height: 30px;
+        text-align: center;
+
+        &:hover {
+          background: $primary-blue;
+          color: white;
+        }
+      }
+    }
+  }
+
+  &__coin-events {
+    width: 100%;
+    padding: 0 50px;
+    box-sizing: border-box;
+
+    border-bottom: 2px solid rgba(125, 125, 125, 0.4);
+
+    .event-title-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &__event-buttons {
+        display: flex;
+        flex-direction: row;
+
+        a {
+          margin-left: 10px;
+        }
+      }
+    }
+
+    .event-item-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 300px;
+      padding: 20px;
+      margin-right: 20px;
+
+      background: $bg-gray;
+      border: 1px solid rgba(125, 125, 125, 0.4);
+      box-shadow: 0px 0px 5px 0px rgba(125, 125, 125, 0.4);
+
+      h2 {
+        line-height: 21px;
+      }
+
+      &__event-title {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: $black;
+        line-height: 25px;
+      }
+
+      &__event-details-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 160px;
+        width: 100%;
+      }
+
+      &__line-break {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        width: 40%;
+        border: 2px solid $primary-blue;
+      }
+
+      &__event-details {
+        p {
+          line-height: 24px;
+        }
+      }
+
+      &__event-approval-rating {
+        margin-top: 5px;
+        font-size: 15px;
+        line-height: 1.2;
+        color: $gray;
+      }
+
+      &__event-votes {
+        margin-top: 10px;
+
+        .vote-button {
+          margin: 0 5px;
+          padding: 5px 10px;
+          color: $black;
+          background: white;
+          border-radius: 25px;
+          line-height: 18px;
+
+          &:hover {
+            text-decoration: none;
+          }
+
+          p {
+            display: inline;
+
+            font-size: 18px;
+          }
+
+          .glyphicon-chevron-up {
+            font-size: 16px;
+            color: green;
+          }
+
+          .glyphicon-chevron-down {
+            font-size: 16px;
+            color: red;
+          }
+        }
+      }
+    }
+  }
+
+  .coin-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: $bg-gray;
+
+    &__coin-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+      padding: 50px 75px;
+
+      .questions-container {
+        flex: 2;
+        margin-right: 50px;
+
+        &__question-section {
+          width: 100%;
+          margin-bottom: 20px;
+          padding: 40px;
+
+          background: white;
+          box-shadow: 0px 0px 5px 0px rgba(125, 125, 125, 0.4);
+
+          h4 {
+            margin-bottom: 20px;
+          }
+
+          p {
+            margin-bottom: 30px;
+
+            color: $gray;
+          }
+
+          .buttons-group {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .secondary-small {
+              border: 1px solid $primary-blue;
+            }
+
+            .secondary-small:first-child {
+              margin-right: 10px;
+            }
+          }
+
+          .term-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+
+            border-bottom: 2px solid $bg-gray;
+
+            &__header{
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+          }
+        }
+      }
+
+      .basic-info-container {
+        flex: 1;
+        height: 100%;
+
+        background: white;
+        box-shadow: 0px 0px 5px 0px rgba(125, 125, 125, 0.4);
+
+        &__coin-id {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 50px 50px 0 50px;
+
+          border-bottom: 1px solid rgba(125, 125, 125, 0.2);
+
+          img {
+            width: 50%;
+            margin-bottom: 40px;
+          }
+        }
+
+        &__coin-title-info {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          margin-bottom: 40px;
+
+          .coin-change {
+            margin-left: 10px;
+          }
+
+          .positive {
+            color: green;
+          }
+
+          .negative {
+            color: red;
+          }
+        }
+
+        a {
+          margin-bottom: 40px;
+        }
+
+        &__info-container {
+          padding: 40px;
+
+          border-bottom: 1px solid rgba(125, 125, 125, 0.2);
+
+          h4 {
+            margin-bottom: 10px;
+          }
+
+          p {
+            color: $gray;
+            line-height: 30px;
+          }
+
+          b {
+            color: $black;
+          }
+
+          .other-links-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+
+            a, h4 {
+              margin: 0;
+            }
+          }
+
+          .other-links-container {
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+}
